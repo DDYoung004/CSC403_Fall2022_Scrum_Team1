@@ -7,6 +7,7 @@ namespace TowerDefense_TheRPG {
   public partial class FrmMain : Form {
     #region Fields
     private SoundPlayer bgMusic;
+    private string FilePath;
     private Player player;
     private Village village;
     private List<Enemy> enemies;
@@ -20,7 +21,9 @@ namespace TowerDefense_TheRPG {
     #region Ctor
     public FrmMain() {
       InitializeComponent();
-      bgMusic = new SoundPlayer(@"rpg-city-8381.wav");
+      FilePath = Directory.GetCurrentDirectory();
+      FilePath = Path.GetFullPath(Path.Combine(FilePath, @"..\..\..\"));
+      bgMusic = new SoundPlayer(FilePath + "data/rpg-city-8381.wav");
       bgMusic.PlayLooping();
       FormManager.PushToFormStack(this);
       DoubleBuffered = true;
@@ -79,7 +82,7 @@ namespace TowerDefense_TheRPG {
 
     // buttons
     private void btnStart_Click(object sender, EventArgs e) {
-      bgMusic = new SoundPlayer(@"comatose-114706.wav");
+      bgMusic = new SoundPlayer(FilePath + "data/comatose-114706.wav");
       bgMusic.PlayLooping();
       BackgroundImage = null;
       btnStart.Visible = false;
@@ -110,7 +113,7 @@ namespace TowerDefense_TheRPG {
     private void btnStoryLine_Click(object sender, EventArgs e) {
       if (btnStoryLine.Text.StartsWith("Show")) {
         Storyline();
-        bgMusic = new SoundPlayer(@"never-again-108445.wav");
+        bgMusic = new SoundPlayer(FilePath + "data/never-again-108445.wav");
         bgMusic.PlayLooping();
         BackgroundImage = null;
         btnStart.Visible = false;
@@ -123,7 +126,7 @@ namespace TowerDefense_TheRPG {
         tmrTextCrawl.Enabled = true;
       }
       else {
-        bgMusic = new SoundPlayer(@"rpg-city-8381.wav");
+        bgMusic = new SoundPlayer(FilePath + "data/rpg-city-8381.wav");
         bgMusic.PlayLooping();
         BackgroundImage = Resources.title;
         btnStart.Visible = true;
