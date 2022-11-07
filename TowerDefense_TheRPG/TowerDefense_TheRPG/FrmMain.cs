@@ -1,9 +1,12 @@
 using TowerDefense_TheRPG.code;
 using TowerDefense_TheRPG.Properties;
+using System.Media;
+using System.Numerics;
 
 namespace TowerDefense_TheRPG {
   public partial class FrmMain : Form {
     #region Fields
+    private SoundPlayer bgMusic;
     private Player player;
     private Village village;
     private List<Enemy> enemies;
@@ -17,6 +20,8 @@ namespace TowerDefense_TheRPG {
     #region Ctor
     public FrmMain() {
       InitializeComponent();
+      bgMusic = new SoundPlayer(@"rpg-city-8381.wav");
+      bgMusic.PlayLooping();
       FormManager.PushToFormStack(this);
       DoubleBuffered = true;
       ControlManager.ResMan = Resources.ResourceManager;
@@ -74,6 +79,8 @@ namespace TowerDefense_TheRPG {
 
     // buttons
     private void btnStart_Click(object sender, EventArgs e) {
+      bgMusic = new SoundPlayer(@"comatose-114706.wav");
+      bgMusic.PlayLooping();
       BackgroundImage = null;
       btnStart.Visible = false;
       btnStart.Enabled = false;
@@ -103,6 +110,8 @@ namespace TowerDefense_TheRPG {
     private void btnStoryLine_Click(object sender, EventArgs e) {
       if (btnStoryLine.Text.StartsWith("Show")) {
         Storyline();
+        bgMusic = new SoundPlayer(@"never-again-108445.wav");
+        bgMusic.PlayLooping();
         BackgroundImage = null;
         btnStart.Visible = false;
         btnStoryLine.Text = "Hide Storyline";
@@ -114,6 +123,8 @@ namespace TowerDefense_TheRPG {
         tmrTextCrawl.Enabled = true;
       }
       else {
+        bgMusic = new SoundPlayer(@"rpg-city-8381.wav");
+        bgMusic.PlayLooping();
         BackgroundImage = Resources.title;
         btnStart.Visible = true;
         btnStoryLine.Text = "Show Storyline";
