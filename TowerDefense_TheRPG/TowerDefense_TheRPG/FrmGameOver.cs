@@ -10,19 +10,29 @@ using System.Windows.Forms;
 using TowerDefense_TheRPG.code;
 using System.Media;
 using System.Diagnostics;
+using System.Windows.Media;
 
 namespace TowerDefense_TheRPG {
   public partial class FrmGameOver : Form {
 
-    private SoundPlayer bgMusic;
+    private MediaPlayer bgMusic;
     private string FilePath;
 
     public FrmGameOver() {
       InitializeComponent();
       FilePath = Directory.GetCurrentDirectory();
       FilePath = Path.GetFullPath(Path.Combine(FilePath, @"..\..\..\"));
-      bgMusic = new SoundPlayer(FilePath + "data/hopeless-119866.wav");
-      bgMusic.PlayLooping();
+      bgMusic = new MediaPlayer();
+      bgMusic.MediaEnded += new EventHandler(BGMusic_Ended);
+      bgMusic.Open(new Uri(FilePath + "data/hopeless-119866.wav"));
+      bgMusic.Play();
+
+    }
+
+    private void BGMusic_Ended(object sender, EventArgs e)
+    {
+        bgMusic.Position = TimeSpan.Zero;
+        bgMusic.Play();
     }
 
     private void FrmGameOver_FormClosing(object sender, FormClosingEventArgs e) {

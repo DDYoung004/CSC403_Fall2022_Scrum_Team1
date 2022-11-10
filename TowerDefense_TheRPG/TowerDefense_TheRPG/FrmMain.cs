@@ -2,11 +2,13 @@ using TowerDefense_TheRPG.code;
 using TowerDefense_TheRPG.Properties;
 using System.Media;
 using System.Numerics;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace TowerDefense_TheRPG {
   public partial class FrmMain : Form {
     #region Fields
-    private SoundPlayer bgMusic;
+    private MediaPlayer bgMusic;
     private string FilePath;
     private Player player;
     private Village village;
@@ -21,10 +23,14 @@ namespace TowerDefense_TheRPG {
     #region Ctor
     public FrmMain() {
       InitializeComponent();
+
       FilePath = Directory.GetCurrentDirectory();
       FilePath = Path.GetFullPath(Path.Combine(FilePath, @"..\..\..\"));
-      bgMusic = new SoundPlayer(FilePath + "data/rpg-city-8381.wav");
-      bgMusic.PlayLooping();
+      bgMusic = new MediaPlayer();
+      bgMusic.MediaEnded += new EventHandler(BGMusic_Ended);
+      bgMusic.Open(new Uri(FilePath + "data/rpg-city-8381.wav"));
+      bgMusic.Play();
+
       FormManager.PushToFormStack(this);
       DoubleBuffered = true;
       ControlManager.ResMan = Resources.ResourceManager;
@@ -34,6 +40,13 @@ namespace TowerDefense_TheRPG {
     #endregion
 
     #region Event functions
+    
+    private void BGMusic_Ended(object sender, EventArgs e)
+        {
+            bgMusic.Position = TimeSpan.Zero;
+            bgMusic.Play();
+        }
+
     // timers
     private void tmrTextCrawl_Tick(object sender, EventArgs e) {
       if (curStoryLineIndex < storyLine.Length) {
@@ -82,8 +95,10 @@ namespace TowerDefense_TheRPG {
 
     // buttons
     private void btnStart_Click(object sender, EventArgs e) {
-      bgMusic = new SoundPlayer(FilePath + "data/comatose-114706.wav");
-      bgMusic.PlayLooping();
+        
+      bgMusic.Open(new Uri(FilePath + "data/comatose-114706.wav"));
+      bgMusic.Play();
+
       BackgroundImage = null;
       btnStart.Visible = false;
       btnStart.Enabled = false;
@@ -113,8 +128,10 @@ namespace TowerDefense_TheRPG {
     private void btnStoryLine_Click(object sender, EventArgs e) {
       if (btnStoryLine.Text.StartsWith("Show")) {
         Storyline();
-        bgMusic = new SoundPlayer(FilePath + "data/never-again-108445.wav");
-        bgMusic.PlayLooping();
+        
+        bgMusic.Open(new Uri(FilePath + "data/never-again-108445.wav"));
+        bgMusic.Play();
+
         BackgroundImage = null;
         btnStart.Visible = false;
         btnStoryLine.Text = "Hide Storyline";
@@ -126,8 +143,10 @@ namespace TowerDefense_TheRPG {
         tmrTextCrawl.Enabled = true;
       }
       else {
-        bgMusic = new SoundPlayer(FilePath + "data/rpg-city-8381.wav");
-        bgMusic.PlayLooping();
+
+        bgMusic.Open(new Uri(FilePath + "data/rpg-city-8381.wav"));
+        bgMusic.Play();
+
         BackgroundImage = Resources.title;
         btnStart.Visible = true;
         btnStoryLine.Text = "Show Storyline";
@@ -222,6 +241,7 @@ namespace TowerDefense_TheRPG {
           village.TakeDamageFrom(enemy);
           if (village.CurHealth <= 0) {
             village.Hide(); // defeated
+            bgMusic.Stop();
             Form frmGO = new FrmGameOver();
             frmGO.Show();
             this.Hide();
