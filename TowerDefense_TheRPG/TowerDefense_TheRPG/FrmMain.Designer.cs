@@ -38,6 +38,12 @@
             this.tmrMoveArrows = new System.Windows.Forms.Timer(this.components);
             this.tmrSpawnArrows = new System.Windows.Forms.Timer(this.components);
             this.lblPause = new System.Windows.Forms.Label();
+            this.settingMenu = new System.Windows.Forms.Panel();
+            this.settingsXbtn = new System.Windows.Forms.Button();
+            this.volumeBar = new System.Windows.Forms.HScrollBar();
+            this.settingsBtn = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.settingMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStoryLine
@@ -97,20 +103,75 @@
             // 
             this.tmrSpawnArrows.Interval = 5000;
             this.tmrSpawnArrows.Tick += new System.EventHandler(this.tmrSpawnArrows_Tick);
-            //
-            // Pause
-            //
+            // 
+            // lblPause
+            // 
             this.lblPause.BackColor = System.Drawing.Color.Transparent;
             this.lblPause.Font = new System.Drawing.Font("Segoe UI Emoji", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPause.ForeColor = System.Drawing.Color.White;
             this.lblPause.Location = new System.Drawing.Point(12, 9);
-            this.lblPause.Name = "Pause";
+            this.lblPause.Name = "lblPause";
             this.lblPause.Size = new System.Drawing.Size(260, 100);
             this.lblPause.TabIndex = 0;
             this.lblPause.Text = "Paused";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Pause);
             // 
-            // Form1
+            // settingMenu
+            // 
+            this.settingMenu.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.settingMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.SettingMenu1;
+            this.settingMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settingMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.settingMenu.Controls.Add(this.settingsXbtn);
+            this.settingMenu.Controls.Add(this.volumeBar);
+            this.settingMenu.Location = new System.Drawing.Point(97, 99);
+            this.settingMenu.Name = "settingMenu";
+            this.settingMenu.Size = new System.Drawing.Size(954, 528);
+            this.settingMenu.TabIndex = 4;
+            this.settingMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // settingsXbtn
+            // 
+            this.settingsXbtn.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.xbutton;
+            this.settingsXbtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settingsXbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.settingsXbtn.Location = new System.Drawing.Point(919, 3);
+            this.settingsXbtn.Name = "settingsXbtn";
+            this.settingsXbtn.Size = new System.Drawing.Size(30, 30);
+            this.settingsXbtn.TabIndex = 1;
+            this.settingsXbtn.UseVisualStyleBackColor = true;
+            this.settingsXbtn.Click += new System.EventHandler(this.settingsXbtn_Click);
+            // 
+            // volumeBar
+            // 
+            this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.volumeBar.Location = new System.Drawing.Point(406, 113);
+            this.volumeBar.Name = "volumeBar";
+            this.volumeBar.Size = new System.Drawing.Size(346, 21);
+            this.volumeBar.TabIndex = 0;
+            this.volumeBar.MouseLeave += new System.EventHandler(this.volumeBar_Scroll);
+            // 
+            // settingsBtn
+            // 
+            this.settingsBtn.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.settings;
+            this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settingsBtn.Location = new System.Drawing.Point(1107, 9);
+            this.settingsBtn.Name = "settingsBtn";
+            this.settingsBtn.Size = new System.Drawing.Size(30, 30);
+            this.settingsBtn.TabIndex = 1;
+            this.settingsBtn.UseVisualStyleBackColor = true;
+            this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(1147, 266);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(83, 19);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -118,18 +179,22 @@
             this.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.title;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1149, 726);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.settingsBtn);
+            this.Controls.Add(this.settingMenu);
             this.Controls.Add(this.btnStoryLine);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblStoryLine);
             this.Controls.Add(this.lblPause);
             this.DoubleBuffered = true;
-            this.Name = "Form1";
+            this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tower Defense The RPG";
+            this.Click += new System.EventHandler(this.settingsXbtn_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.settingMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-            
 
         }
 
@@ -144,5 +209,10 @@
         private System.Windows.Forms.Timer tmrMoveArrows;
         private System.Windows.Forms.Timer tmrSpawnArrows;
         private Label lblPause;
+        internal Panel settingMenu;
+        internal HScrollBar volumeBar;
+        private Button settingsXbtn;
+        private Button settingsBtn;
+        private CheckBox checkBox1;
     }
 }
