@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TowerDefense_TheRPG.code;
 using TowerDefense_TheRPG.Properties;
 
@@ -14,6 +15,7 @@ namespace TowerDefense_TheRPG
         private int curStoryLineIndex;
         private Random rand;
         public bool pause = false;
+        private int round;
         #endregion
 
         #region Methods
@@ -46,21 +48,21 @@ namespace TowerDefense_TheRPG
         private void tmrSpawnEnemies_Tick(object sender, EventArgs e)
         {
             GenEnemyPos(out int x, out int y);
-            int enemyType = rand.Next(4);
+            
             Enemy balloon;
-            switch (enemyType)
+            switch (round)
             {
-                case 0:
-                    balloon = Enemy.MakeRedBalloon(x, y);
-                    break;
                 case 1:
-                    balloon = Enemy.MakePurpleBalloon(x, y);
-                    break;
-                case 2:
                     balloon = Enemy.MakeGrayBalloon(x, y);
                     break;
-                default:
+                case 2:
                     balloon = Enemy.MakeOrangeBalloon(x, y);
+                    break;
+                case 3:
+                    balloon = Enemy.MakePurpleBalloon(x, y);
+                    break;
+                default:
+                    balloon = Enemy.MakeRedBalloon(x, y);
                     break;
 
             }
@@ -68,6 +70,7 @@ namespace TowerDefense_TheRPG
         }
         private void tmrMoveEnemies_Tick(object sender, EventArgs e)
         {
+            roundHelper(player.Level, player.XP);
             MoveEnemies();
         }
         private void tmrSpawnArrows_Tick(object sender, EventArgs e)
@@ -108,6 +111,7 @@ namespace TowerDefense_TheRPG
             tmrMoveArrows.Enabled = true;
             tmrTextCrawl.Enabled = false;
             lblPause.Visible = false;
+            lblRound.Visible = true;
 
             // TODO: setting the background image here causes visual defects as enemies and player move
             //       around the screen. Consider either fixing these defects or setting BackgroundImage to null
@@ -165,6 +169,18 @@ namespace TowerDefense_TheRPG
             lblStoryLine.Text = "";
             tmrTextCrawl.Enabled = true;
             curStoryLineIndex = 0;
+        }
+        public int getRound(int level)
+        {   
+            if (level % 10 == 0)
+            {
+                round = level / 10;
+            }
+            return round;
+        }
+        public void roundHelper(int level, int xp)
+        {
+            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString());
         }
         public void GenEnemyPos(out int x, out int y)
         {

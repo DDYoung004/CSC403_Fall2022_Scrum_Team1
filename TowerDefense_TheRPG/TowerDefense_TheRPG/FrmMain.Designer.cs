@@ -2,6 +2,7 @@
 {
     partial class FrmMain
     {
+
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -38,6 +39,7 @@
             this.tmrMoveArrows = new System.Windows.Forms.Timer(this.components);
             this.tmrSpawnArrows = new System.Windows.Forms.Timer(this.components);
             this.lblPause = new System.Windows.Forms.Label();
+            this.lblRound = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblStoryLine
@@ -109,6 +111,17 @@
             this.lblPause.TabIndex = 0;
             this.lblPause.Text = "Paused";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Pause);
+            ///
+            /// Rounds
+            ///
+            this.lblRound.BackColor = System.Drawing.Color.Transparent;
+            this.lblRound.Font = new System.Drawing.Font("Segoe UI Emoji", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRound.ForeColor = System.Drawing.Color.White;
+            this.lblRound.Location = new System.Drawing.Point(770, 9);
+            this.lblRound.Name = "Round";
+            this.lblRound.Size = new System.Drawing.Size(250, 50);
+            this.lblRound.TabIndex = 0;
+            //this.lblRound.Text = "Round";
             // 
             // Form1
             // 
@@ -122,6 +135,7 @@
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblStoryLine);
             this.Controls.Add(this.lblPause);
+            this.Controls.Add(this.lblRound);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -144,5 +158,6 @@
         private System.Windows.Forms.Timer tmrMoveArrows;
         private System.Windows.Forms.Timer tmrSpawnArrows;
         private Label lblPause;
+        private Label lblRound;
     }
 }
