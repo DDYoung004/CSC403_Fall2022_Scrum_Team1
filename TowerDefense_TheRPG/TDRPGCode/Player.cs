@@ -58,6 +58,22 @@
     }
 
     /// <summary>
+    /// Call this function whenever the player collides with an <see cref="PowerUp"/>
+    /// </summary>
+    /// <param name="statsMult">How much experience the player should gain. 
+    ///                        Use <see cref="PowerUp.StatsMultiplier"/> for this</param>
+    /// <param name="statsType">How much experience the player should gain. 
+    ///                        Use <see cref="PowerUp.StatsType"/> for this</param>
+    public void GainTempStats(int statsMult, string statsType) {
+      if (statsType == "Attack") {
+                Attack += statsMult;
+      }
+      if (statsType == "MoveSpeed") {
+                MoveSpeed += statsMult;
+      }
+    }
+
+    /// <summary>
     /// Internal function that is automatically called when 
     /// player gains a level (called from GainXP method)
     /// </summary>

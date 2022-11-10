@@ -7,6 +7,7 @@ namespace TowerDefense_TheRPG {
     private Player player;
     private Village village;
     private List<Enemy> enemies;
+    private List<PowerUp> power_ups;
     private List<Arrow> arrows;
     private string storyLine;
     private int curStoryLineIndex;
@@ -66,6 +67,23 @@ namespace TowerDefense_TheRPG {
     private void tmrMoveArrows_Tick(object sender, EventArgs e) {
       MoveArrows();
     }
+    private void tmrSpawnPowerUps_Tick(object sender, EventArgs e) {
+      GenPowerUpPos(out int x, out int y);
+      int powerUpType = rand.Next(2);
+      PowerUp powerup;
+      switch (powerUpType) {
+        case 0:
+          powerup = PowerUp.MakeAtackPowerUp(x, y);
+          break;
+        default:
+          powerup = PowerUp.MakeSpeedPowerUp(x, y);
+          break;
+      }
+      power_ups.Add(powerup);
+    }
+    private void tmrMovePowerUps_Tick(object sender, EventArgs e) {
+      MovePowerUps();
+    }
 
     // form
     private void Form1_KeyDown(object sender, KeyEventArgs e) {
@@ -82,12 +100,15 @@ namespace TowerDefense_TheRPG {
       lblStoryLine.Visible = false;
 
       enemies = new List<Enemy>();
+      power_ups = new List<PowerUp>();
       arrows = new List<Arrow>();
       player = new Player(Width / 2, Height / 2 + 100);
       village = new Village(Width / 2 - 80, Height / 2 - 50);
       village.ControlContainer.SendToBack();
       tmrSpawnEnemies.Enabled = true;
       tmrMoveEnemies.Enabled = true;
+      tmrSpawnPowerUps.Enabled = true;
+      tmrMovePowerUps.Enabled = true;
       tmrMoveArrows.Enabled = true;
       tmrTextCrawl.Enabled = false;
 
@@ -110,6 +131,8 @@ namespace TowerDefense_TheRPG {
 
         tmrSpawnEnemies.Enabled = false;
         tmrMoveEnemies.Enabled = false;
+        tmrSpawnPowerUps.Enabled = false;
+        tmrMovePowerUps.Enabled = false;
         tmrMoveArrows.Enabled = false;
         tmrTextCrawl.Enabled = true;
       }
@@ -160,6 +183,26 @@ namespace TowerDefense_TheRPG {
           x = rand.Next(0, Width);
           y = -offscreen;
           break;
+      }
+    }
+    public void GenPowerUpPos(out int x, out int y) {
+      x = rand.Next(60, Width - 60);
+      y = rand.Next(60, Height - 60);
+    }
+    private void MovePowerUps() {
+      List<PowerUp> powerUpsToRemove = new List<PowerUp>();
+      foreach (PowerUp power in power_ups) {
+        if (power.DidCollide(player)) {
+            power.TakeDamageFrom(player);
+            if (power.CurHealth <= 0) {
+                power.Hide();
+                player.GainTempStats(power.StatsMultiplier, power.StatsType);
+            }
+            powerUpsToRemove.Add(power);
+        }
+      }
+      foreach (PowerUp power in powerUpsToRemove) {
+        power_ups.Remove(power);
       }
     }
     private void MoveEnemies() {
@@ -217,8 +260,9 @@ namespace TowerDefense_TheRPG {
             tmrMoveArrows.Enabled = false;
             tmrMoveEnemies.Enabled = false;
             tmrSpawnArrows.Enabled = false;
-
             tmrSpawnEnemies.Enabled = false;
+            tmrSpawnPowerUps.Enabled = false;
+            tmrMovePowerUps.Enabled = false;
           }
           else {
             enemy.KnockBack();
