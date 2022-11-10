@@ -188,6 +188,7 @@ namespace TowerDefense_TheRPG {
             enemy.Hide();
             int levelBefore = player.Level;
             player.GainXP(enemy.XPGiven);
+            player.GainMoney(enemy.MoneyGiven);
             int levelAfter = player.Level;
             if (levelBefore == 1 && levelAfter == 2) {
               tmrSpawnArrows.Enabled = true;
@@ -247,6 +248,7 @@ namespace TowerDefense_TheRPG {
             if (enemy.CurHealth <= 0) {
               enemy.Hide();
               player.GainXP(enemy.XPGiven);
+              player.GainMoney(enemy.MoneyGiven);
             }
             else {
               enemy.KnockBack();

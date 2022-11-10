@@ -69,5 +69,14 @@
         AutoShoot = true;
       }
     }
+
+    /// <summary>
+	/// Call this function whenever the player defeats an <see cref="Enemy"/>
+	/// </summary>
+	/// <param name="moneyGained">How much money the player should gain. 
+	///                        Use <see cref="Enemy.MoneyGiven"/> for this</param>
+	public void GainMoney(int moneyGained) {
+      Money += moneyGained;
+	}
   }
 }

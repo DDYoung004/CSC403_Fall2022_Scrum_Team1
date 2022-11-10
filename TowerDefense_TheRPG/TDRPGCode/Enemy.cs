@@ -7,6 +7,11 @@
     /// The amount of experience given to player if this enemy is defeated
     /// </summary>
     public int XPGiven { get; private set; }
+    
+    /// <summary>
+    /// The amount of money given to player if this enemy is defeated
+    /// </summary>
+    public int MoneyGiven { get; private set; }
 
     /// <summary>
     /// Default constructor
@@ -31,6 +36,7 @@
       balloon.SetMaxHealth(0.1f);
       balloon.Attack = 0.5f;
       balloon.XPGiven = 1;
+      balloon.MoneyGiven = 10;
       return balloon;
     }
 
@@ -46,6 +52,7 @@
       balloon.SetMaxHealth(0.5f);
       balloon.Attack = 0.3f;
       balloon.XPGiven = 3;
+      balloon.MoneyGiven = 30;
       return balloon;
     }
 
@@ -61,6 +68,7 @@
       balloon.SetMaxHealth(1.0f);
       balloon.Attack = 1f;
       balloon.XPGiven = 7;
+      balloon.MoneyGiven = 70;
       return balloon;
     }
 
@@ -76,6 +84,7 @@
       balloon.SetMaxHealth(0.2f);
       balloon.Attack = 0.1f;
       balloon.XPGiven = 5;
+      balloon.MoneyGiven = 50;
       return balloon;
     }
   }
