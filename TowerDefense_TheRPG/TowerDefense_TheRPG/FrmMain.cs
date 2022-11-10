@@ -8,7 +8,7 @@ namespace TowerDefense_TheRPG
     public partial class FrmMain : Form
     {
         #region Fields
-        private MediaPlayer bgMusic;
+        public MediaPlayer bgMusic;
         private string FilePath;
         private Player player;
         private Village village;
@@ -175,6 +175,31 @@ namespace TowerDefense_TheRPG
         {
             SwapPause(e.KeyCode);
         }
+
+        private void settingsXbtn_Click(object sender, EventArgs e)
+        {
+            settingMenu.Visible = false;
+            volumeBar.Visible = false;
+            settingsXbtn.Visible = false;
+            settingsBtn.Visible = true;
+
+        }
+
+        private void settingsBtn_Click(object sender, EventArgs e)
+        {
+            settingMenu.Visible = true;
+            volumeBar.Visible = true;
+            settingsXbtn.Visible = true;
+            settingsBtn.Visible = false;
+        }
+
+        private void volumeBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            bgMusic.Volume = ((double)volumeBar.Value / 100);
+            //Stop
+        }
+
+
         #endregion
 
         #region Helper functions 
@@ -279,7 +304,7 @@ namespace TowerDefense_TheRPG
                     {
                         village.Hide(); // defeated
                         bgMusic.Stop();
-                        Form frmGO = new FrmGameOver();
+                        Form frmGO = new FrmGameOver(bgMusic.Volume);
                         frmGO.Show();
                         this.Hide();
                         FormManager.PushToFormStack(frmGO);
@@ -398,33 +423,5 @@ namespace TowerDefense_TheRPG
         #endregion
 
         #endregion
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void settingsXbtn_Click(object sender, EventArgs e)
-        {
-            settingMenu.Visible = false;
-            volumeBar.Visible = false;
-            settingsXbtn.Visible = false;
-            settingsBtn.Visible = true;
-
-        }
-
-        private void settingsBtn_Click(object sender, EventArgs e)
-        {
-            settingMenu.Visible = true;
-            volumeBar.Visible = true;
-            settingsXbtn.Visible = true;
-            settingsBtn.Visible = false;
-        }
-
-        private void volumeBar_Scroll(object sender, EventArgs e)
-        {
-            bgMusic.Volume = (double)(volumeBar.Value / 100);
-            bgMusic.Play();
-        }
     }
 }

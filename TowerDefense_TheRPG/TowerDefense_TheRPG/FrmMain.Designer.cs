@@ -42,7 +42,6 @@
             this.settingsXbtn = new System.Windows.Forms.Button();
             this.volumeBar = new System.Windows.Forms.HScrollBar();
             this.settingsBtn = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.settingMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,7 +126,6 @@
             this.settingMenu.Name = "settingMenu";
             this.settingMenu.Size = new System.Drawing.Size(954, 528);
             this.settingMenu.TabIndex = 4;
-            this.settingMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // settingsXbtn
             // 
@@ -144,11 +142,11 @@
             // volumeBar
             // 
             this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.volumeBar.Location = new System.Drawing.Point(406, 113);
+            this.volumeBar.Location = new System.Drawing.Point(402, 111);
             this.volumeBar.Name = "volumeBar";
-            this.volumeBar.Size = new System.Drawing.Size(346, 21);
+            this.volumeBar.Size = new System.Drawing.Size(350, 21);
             this.volumeBar.TabIndex = 0;
-            this.volumeBar.MouseLeave += new System.EventHandler(this.volumeBar_Scroll);
+            this.volumeBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.volumeBar_Scroll);
             // 
             // settingsBtn
             // 
@@ -161,16 +159,6 @@
             this.settingsBtn.UseVisualStyleBackColor = true;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(1147, 266);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(83, 19);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -179,7 +167,6 @@
             this.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.title;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1149, 726);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.settingsBtn);
             this.Controls.Add(this.settingMenu);
             this.Controls.Add(this.btnStoryLine);
@@ -213,6 +200,5 @@
         internal HScrollBar volumeBar;
         private Button settingsXbtn;
         private Button settingsBtn;
-        private CheckBox checkBox1;
     }
 }

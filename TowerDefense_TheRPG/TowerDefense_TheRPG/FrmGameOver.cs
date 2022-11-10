@@ -18,12 +18,13 @@ namespace TowerDefense_TheRPG {
     private MediaPlayer bgMusic;
     private string FilePath;
 
-    public FrmGameOver() {
+    public FrmGameOver(double volume) {
       InitializeComponent();
       FilePath = Directory.GetCurrentDirectory();
       FilePath = Path.GetFullPath(Path.Combine(FilePath, @"..\..\..\"));
       bgMusic = new MediaPlayer();
       bgMusic.MediaEnded += new EventHandler(BGMusic_Ended);
+      bgMusic.Volume = volume;
       bgMusic.Open(new Uri(FilePath + "data/hopeless-119866.wav"));
       bgMusic.Play();
 
