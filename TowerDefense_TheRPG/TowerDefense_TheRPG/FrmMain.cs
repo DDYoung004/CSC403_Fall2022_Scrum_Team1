@@ -136,6 +136,7 @@ namespace TowerDefense_TheRPG
                 tmrMoveEnemies.Enabled = false;
                 tmrMoveArrows.Enabled = false;
                 tmrTextCrawl.Enabled = true;
+                lblPause.Visible = false;
             }
             else
             {
@@ -143,7 +144,6 @@ namespace TowerDefense_TheRPG
                 btnStart.Visible = true;
                 btnStoryLine.Text = "Show Storyline";
                 lblStoryLine.Visible = false;
-
                 tmrTextCrawl.Enabled = false;
             }
         }
