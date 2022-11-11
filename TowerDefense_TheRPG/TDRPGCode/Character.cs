@@ -165,8 +165,10 @@
         Left = 0,
       };
       ControlContainer.Controls.Add(ControlCharacter);
-      ControlContainer.Controls.Add(ControlHealthBarFull);
-      ControlContainer.Controls.Add(ControlHealthBarEmpty);
+      if (Name != "attack_power_up" && Name != "speed_power_up") {
+                ControlContainer.Controls.Add(ControlHealthBarFull);
+                ControlContainer.Controls.Add(ControlHealthBarEmpty);
+      }
       ControlManager.Form.Controls.Add(ControlContainer);
     }
 

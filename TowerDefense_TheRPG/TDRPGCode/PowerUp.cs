@@ -37,7 +37,7 @@ namespace TowerDefense_TheRPG.code
         /// <returns>The power up <see cref="PowerUp"/> object</returns>
         public static PowerUp MakeAtackPowerUp(int x, int y)
         {
-            PowerUp power_up = new PowerUp("car", x, y, 40, 40);
+            PowerUp power_up = new PowerUp("attack_power_up", x, y, 40, 40);
             power_up.MoveSpeed = 0;
             power_up.SetMaxHealth(0.1f);
             power_up.Attack = 0.0f;
@@ -54,7 +54,7 @@ namespace TowerDefense_TheRPG.code
         /// <returns>The power up <see cref="PowerUp"/> object</returns>
         public static PowerUp MakeSpeedPowerUp(int x, int y)
         {
-            PowerUp power_up = new PowerUp("speed_power_up_red", x, y, 40, 40);
+            PowerUp power_up = new PowerUp("speed_power_up", x, y, 40, 40);
             power_up.MoveSpeed = 0;
             power_up.SetMaxHealth(0.1f);
             power_up.Attack = 0.0f;

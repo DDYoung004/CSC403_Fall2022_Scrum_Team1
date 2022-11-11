@@ -34,6 +34,7 @@
             this.tmrSpawnArrows = new System.Windows.Forms.Timer(this.components);
             this.tmrSpawnPowerUps = new System.Windows.Forms.Timer(this.components);
             this.tmrMovePowerUps = new System.Windows.Forms.Timer(this.components);
+            this.tmrRemovePowerUps = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblStoryLine
@@ -98,12 +99,17 @@
             // 
             // tmrSpawnPowerUps
             // 
-            this.tmrSpawnPowerUps.Interval = 1000;
+            this.tmrSpawnPowerUps.Interval = 15000;
             this.tmrSpawnPowerUps.Tick += new System.EventHandler(this.tmrSpawnPowerUps_Tick);
             // 
             // tmrMovePowerUps
             // 
             this.tmrMovePowerUps.Tick += new System.EventHandler(this.tmrMovePowerUps_Tick);
+            // 
+            // tmrRemovePowerUps
+            // 
+            this.tmrRemovePowerUps.Interval = 10000;
+            this.tmrRemovePowerUps.Tick += new System.EventHandler(this.tmrRemovePowerUps_tick);
             // 
             // FrmMain
             // 
@@ -139,5 +145,6 @@
     private System.Windows.Forms.Timer tmrSpawnArrows;
     private System.Windows.Forms.Timer tmrSpawnPowerUps;
         private System.Windows.Forms.Timer tmrMovePowerUps;
+        private System.Windows.Forms.Timer tmrRemovePowerUps;
     }
 }

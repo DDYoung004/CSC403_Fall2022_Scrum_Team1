@@ -8,6 +8,7 @@ namespace TowerDefense_TheRPG {
     private Village village;
     private List<Enemy> enemies;
     private List<PowerUp> power_ups;
+    private List<Tuple<int, string>> power_up_temp;
     private List<Arrow> arrows;
     private string storyLine;
     private int curStoryLineIndex;
@@ -85,6 +86,10 @@ namespace TowerDefense_TheRPG {
       MovePowerUps();
     }
 
+    private void tmrRemovePowerUps_tick(object sender, EventArgs e) {
+      RemovePowerUps();
+    }
+
     // form
     private void Form1_KeyDown(object sender, KeyEventArgs e) {
       PlayerMove(e.KeyCode);
@@ -101,6 +106,7 @@ namespace TowerDefense_TheRPG {
 
       enemies = new List<Enemy>();
       power_ups = new List<PowerUp>();
+      power_up_temp = new List<Tuple<int, string>>();
       arrows = new List<Arrow>();
       player = new Player(Width / 2, Height / 2 + 100);
       village = new Village(Width / 2 - 80, Height / 2 - 50);
@@ -109,6 +115,7 @@ namespace TowerDefense_TheRPG {
       tmrMoveEnemies.Enabled = true;
       tmrSpawnPowerUps.Enabled = true;
       tmrMovePowerUps.Enabled = true;
+      tmrRemovePowerUps.Enabled = true;
       tmrMoveArrows.Enabled = true;
       tmrTextCrawl.Enabled = false;
 
@@ -133,6 +140,7 @@ namespace TowerDefense_TheRPG {
         tmrMoveEnemies.Enabled = false;
         tmrSpawnPowerUps.Enabled = false;
         tmrMovePowerUps.Enabled = false;
+        tmrRemovePowerUps.Enabled = false;
         tmrMoveArrows.Enabled = false;
         tmrTextCrawl.Enabled = true;
       }
@@ -197,6 +205,7 @@ namespace TowerDefense_TheRPG {
             if (power.CurHealth <= 0) {
                 power.Hide();
                 player.GainTempStats(power.StatsMultiplier, power.StatsType);
+                power_up_temp.Add(Tuple.Create(power.StatsMultiplier, power.StatsType));
             }
             powerUpsToRemove.Add(power);
         }
@@ -204,6 +213,13 @@ namespace TowerDefense_TheRPG {
       foreach (PowerUp power in powerUpsToRemove) {
         power_ups.Remove(power);
       }
+    }
+    private void RemovePowerUps() {
+      if (power_up_temp?.Any() == false) {
+        power_up_temp.Add(Tuple.Create(0, "attack"));
+      }
+      Tuple<int, string> power = power_up_temp[0];
+      player.RemoveTempStats(power.Item1, power.Item2);
     }
     private void MoveEnemies() {
       foreach (var enemy in enemies) {
@@ -332,7 +348,10 @@ namespace TowerDefense_TheRPG {
           break;
       }
     }
-    #endregion
-    #endregion
-  }
+        #endregion
+
+        #endregion
+
+        
+    }
 }

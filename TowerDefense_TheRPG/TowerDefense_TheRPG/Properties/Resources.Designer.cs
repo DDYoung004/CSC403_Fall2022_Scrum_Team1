@@ -83,6 +83,16 @@ namespace TowerDefense_TheRPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap attack_power_up {
+            get {
+                object obj = ResourceManager.GetObject("attack_power_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gameover {
             get {
                 object obj = ResourceManager.GetObject("gameover", resourceCulture);
@@ -183,6 +193,16 @@ namespace TowerDefense_TheRPG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap speed_power_up {
+            get {
+                object obj = ResourceManager.GetObject("speed_power_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap title {
             get {
                 object obj = ResourceManager.GetObject("title", resourceCulture);
@@ -196,16 +216,6 @@ namespace TowerDefense_TheRPG.Properties {
         internal static System.Drawing.Bitmap village {
             get {
                 object obj = ResourceManager.GetObject("village", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap attack_power_up {
-            get {
-                object obj = ResourceManager.GetObject("attack_power_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
