@@ -136,6 +136,7 @@
             this.settingsXbtn.Name = "settingsXbtn";
             this.settingsXbtn.Size = new System.Drawing.Size(30, 30);
             this.settingsXbtn.TabIndex = 1;
+            this.settingsXbtn.TabStop = false;
             this.settingsXbtn.UseVisualStyleBackColor = true;
             this.settingsXbtn.Click += new System.EventHandler(this.settingsXbtn_Click);
             // 
@@ -156,6 +157,7 @@
             this.settingsBtn.Name = "settingsBtn";
             this.settingsBtn.Size = new System.Drawing.Size(30, 30);
             this.settingsBtn.TabIndex = 1;
+            this.settingsBtn.TabStop = false;
             this.settingsBtn.UseVisualStyleBackColor = true;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 

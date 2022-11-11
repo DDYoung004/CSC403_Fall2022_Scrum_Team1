@@ -17,7 +17,8 @@ namespace TowerDefense_TheRPG
         private string storyLine;
         private int curStoryLineIndex;
         private Random rand;
-        public bool pause = false;
+        private bool pause = false;
+        private bool inSettings = false;
         #endregion
 
         #region Methods
@@ -104,10 +105,22 @@ namespace TowerDefense_TheRPG
         // form
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!pause)
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (inSettings)
+                {
+                    settingsXbtn.PerformClick();
+                }
+                else
+                {
+                    SwapPause(e.KeyCode);
+                }
+            }
+            else if (!pause)
             {
                 PlayerMove(e.KeyCode);
             }
+            
         }
 
         // buttons
@@ -170,10 +183,6 @@ namespace TowerDefense_TheRPG
                 tmrTextCrawl.Enabled = false;
             }
         }
-        private void Pause(object sender, KeyEventArgs e)
-        {
-            SwapPause(e.KeyCode);
-        }
 
         private void settingsXbtn_Click(object sender, EventArgs e)
         {
@@ -183,8 +192,8 @@ namespace TowerDefense_TheRPG
             settingsXbtn.Enabled = false;
             settingsBtn.Visible = true;
             settingsBtn.Enabled = true;
-            this.Focus();
-
+            inSettings = false;
+            Focus();
         }
 
         private void settingsBtn_Click(object sender, EventArgs e)
@@ -195,13 +204,15 @@ namespace TowerDefense_TheRPG
             settingsXbtn.Enabled = true;
             settingsBtn.Visible = false;
             settingsBtn.Enabled = false;
-            this.Focus();
+            pause = false;
+            inSettings = true;
+            SwapPause(Keys.Escape);
+            Focus();
         }
 
         private void volumeBar_Scroll(object sender, ScrollEventArgs e)
         {
             bgMusic.Volume = ((double)volumeBar.Value / 100);
-            //Stop
         }
 
 
@@ -400,6 +411,9 @@ namespace TowerDefense_TheRPG
                 case Keys.Right:
                 case Keys.D:
                     player.Move(+1, 0);
+                    break;
+                case Keys.Escape:
+                    SwapPause(Keys.Escape);
                     break;
             }
         }
