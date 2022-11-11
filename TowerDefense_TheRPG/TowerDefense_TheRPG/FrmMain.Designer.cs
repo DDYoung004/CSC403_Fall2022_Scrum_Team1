@@ -40,6 +40,10 @@
             this.tmrSpawnArrows = new System.Windows.Forms.Timer(this.components);
             this.lblPause = new System.Windows.Forms.Label();
             this.lblRound = new System.Windows.Forms.Label();
+            this.btn_upSpeed = new System.Windows.Forms.Button();
+            this.tmrBtnFix = new System.Windows.Forms.Timer(this.components);
+            this.tmrRound = new System.Windows.Forms.Timer(this.components);
+            this.btn_upAttack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblStoryLine
@@ -99,6 +103,14 @@
             // 
             this.tmrSpawnArrows.Interval = 5000;
             this.tmrSpawnArrows.Tick += new System.EventHandler(this.tmrSpawnArrows_Tick);
+            // 
+            // tmrBtnFix
+            //
+            this.tmrBtnFix.Tick += new System.EventHandler(this.tmrBtnReset);
+            // 
+            // tmrRound
+            //
+            this.tmrRound.Tick += new System.EventHandler(this.round_Tick);
             //
             // Pause
             //
@@ -119,9 +131,32 @@
             this.lblRound.ForeColor = System.Drawing.Color.White;
             this.lblRound.Location = new System.Drawing.Point(770, 9);
             this.lblRound.Name = "Round";
-            this.lblRound.Size = new System.Drawing.Size(250, 50);
+            this.lblRound.Size = new System.Drawing.Size(350, 50);
             this.lblRound.TabIndex = 0;
-            //this.lblRound.Text = "Round";
+            // 
+            // btn_upSpeed
+            // 
+            this.btn_upSpeed.AutoSize = true;
+            this.btn_upSpeed.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_upSpeed.Location = new System.Drawing.Point(315, 630);
+            this.btn_upSpeed.Name = "btn_upSpeed";
+            this.btn_upSpeed.Size = new System.Drawing.Size(120, 35);
+            this.btn_upSpeed.TabIndex = 1;
+            this.btn_upSpeed.TabStop = false;
+            this.btn_upSpeed.UseVisualStyleBackColor = true;
+            this.btn_upSpeed.Click += new System.EventHandler(this.upSpeed_Click);
+            // 
+            // btn_upAttack
+            // 
+            this.btn_upAttack.AutoSize = true;
+            this.btn_upAttack.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_upAttack.Location = new System.Drawing.Point(630, 630);
+            this.btn_upAttack.Name = "btn_upAttack";
+            this.btn_upAttack.Size = new System.Drawing.Size(120, 35);
+            this.btn_upAttack.TabIndex = 1;
+            this.btn_upAttack.TabStop = false;
+            this.btn_upAttack.UseVisualStyleBackColor = true;
+            this.btn_upAttack.Click += new System.EventHandler(this.upAttack_Click);
             // 
             // Form1
             // 
@@ -136,6 +171,8 @@
             this.Controls.Add(this.lblStoryLine);
             this.Controls.Add(this.lblPause);
             this.Controls.Add(this.lblRound);
+            this.Controls.Add(this.btn_upSpeed);
+            this.Controls.Add(this.btn_upAttack);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -157,7 +194,11 @@
         private Button btnStoryLine;
         private System.Windows.Forms.Timer tmrMoveArrows;
         private System.Windows.Forms.Timer tmrSpawnArrows;
+        private System.Windows.Forms.Timer tmrBtnFix;
+        private System.Windows.Forms.Timer tmrRound;
         private Label lblPause;
         private Label lblRound;
+        private Button btn_upSpeed;
+        private Button btn_upAttack;
     }
 }

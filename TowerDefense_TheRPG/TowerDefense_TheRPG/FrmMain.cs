@@ -16,6 +16,8 @@ namespace TowerDefense_TheRPG
         private Random rand;
         public bool pause = false;
         private int round;
+        private int MoneySpeedCounter = 10;
+        private int MoneyAttackCounter = 10;
         #endregion
 
         #region Methods
@@ -70,7 +72,6 @@ namespace TowerDefense_TheRPG
         }
         private void tmrMoveEnemies_Tick(object sender, EventArgs e)
         {
-            roundHelper(player.Level, player.XP);
             MoveEnemies();
         }
         private void tmrSpawnArrows_Tick(object sender, EventArgs e)
@@ -80,6 +81,23 @@ namespace TowerDefense_TheRPG
         private void tmrMoveArrows_Tick(object sender, EventArgs e)
         {
             MoveArrows();
+        }
+        private void tmrBtnReset(object sender, EventArgs e)
+        {
+            if (btn_upSpeed.Visible == false)
+            {
+                btn_upSpeed.Visible = true;
+                btn_upSpeed.Enabled = true;
+            }
+            if (btn_upAttack.Visible == false)
+            {
+                btn_upAttack.Visible = true;
+                btn_upAttack.Enabled = true;
+            }
+        }
+        private void round_Tick(object sender, EventArgs e)
+        {
+            roundHelper(player.Level, player.XP, player.Money);
         }
 
         // form
@@ -112,6 +130,11 @@ namespace TowerDefense_TheRPG
             tmrTextCrawl.Enabled = false;
             lblPause.Visible = false;
             lblRound.Visible = true;
+            tmrRound.Enabled = true;
+            btn_upSpeed.Visible = false;
+            btn_upSpeed.Enabled = false;
+            btn_upAttack.Enabled = false;
+            btn_upAttack.Visible = false;
 
             // TODO: setting the background image here causes visual defects as enemies and player move
             //       around the screen. Consider either fixing these defects or setting BackgroundImage to null
@@ -137,6 +160,10 @@ namespace TowerDefense_TheRPG
                 tmrMoveArrows.Enabled = false;
                 tmrTextCrawl.Enabled = true;
                 lblPause.Visible = false;
+                btn_upSpeed.Enabled = false;
+                btn_upSpeed.Visible = false;
+                btn_upAttack.Enabled = false;
+                btn_upAttack.Visible = false;
             }
             else
             {
@@ -146,6 +173,34 @@ namespace TowerDefense_TheRPG
                 lblStoryLine.Visible = false;
                 tmrTextCrawl.Enabled = false;
             }
+        }
+        private void upSpeed_Click(object sender, EventArgs e)
+        {
+            if(player.Money >= MoneySpeedCounter)
+            {
+                player.SpendMoney(MoneySpeedCounter);
+                player.upgradeMoveSpeed();
+                MoneySpeedCounter += 5;
+            }
+            btn_upSpeed.Text = "SPD^ $" + MoneySpeedCounter.ToString();
+            btn_upSpeed.Visible = false;
+            btn_upSpeed.Enabled = false;
+
+            Focus();
+        }
+        private void upAttack_Click(object sender, EventArgs e)
+        {
+            if (player.Money >= MoneyAttackCounter)
+            {
+                player.SpendMoney(MoneyAttackCounter);
+                player.upgradeAttack();
+                MoneyAttackCounter += 5;
+            }
+            btn_upAttack.Text = "ATK^ $" + MoneyAttackCounter.ToString();
+            btn_upAttack.Visible = false;
+            btn_upAttack.Enabled = false;
+
+            Focus();
         }
         private void Pause(object sender, KeyEventArgs e)
         {
@@ -178,9 +233,9 @@ namespace TowerDefense_TheRPG
             }
             return round;
         }
-        public void roundHelper(int level, int xp)
+        public void roundHelper(int level, int xp, int money)
         {
-            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString());
+            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString() + " | $:" + money.ToString());
         }
         public void GenEnemyPos(out int x, out int y)
         {
@@ -241,6 +296,7 @@ namespace TowerDefense_TheRPG
                         enemy.Hide();
                         int levelBefore = player.Level;
                         player.GainXP(enemy.XPGiven);
+                        player.GainMoney(enemy.MoneyGiven);
                         int levelAfter = player.Level;
                         if (levelBefore == 1 && levelAfter == 2)
                         {
@@ -368,17 +424,29 @@ namespace TowerDefense_TheRPG
             }
             if (pause)
             {
+                tmrBtnFix.Enabled = true;
                 tmrSpawnEnemies.Enabled = false;
                 tmrMoveEnemies.Enabled = false;
                 tmrMoveArrows.Enabled = false;
                 lblPause.Visible = true;
+                btn_upSpeed.Visible = true;
+                btn_upSpeed.Enabled = true;
+                btn_upAttack.Enabled = true;
+                btn_upAttack.Visible = true;
+                btn_upSpeed.Text = "SPD^ $" + MoneySpeedCounter.ToString();
+                btn_upAttack.Text = "ATK^ $" + MoneyAttackCounter.ToString();
             }
             else
             {
                 tmrSpawnEnemies.Enabled = true;
                 tmrMoveEnemies.Enabled = true;
                 tmrMoveArrows.Enabled = true;
+                btn_upSpeed.Visible = false;
+                btn_upSpeed.Enabled = false;
+                btn_upAttack.Enabled = false;
+                btn_upAttack.Visible = false;
                 lblPause.Visible = false;
+                tmrBtnFix.Enabled = false;
             }
             return pause;
         }
