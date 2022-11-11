@@ -167,7 +167,6 @@ namespace TowerDefense_TheRPG
                 btnStart.Visible = true;
                 btnStoryLine.Text = "Show Storyline";
                 lblStoryLine.Visible = false;
-
                 tmrTextCrawl.Enabled = false;
             }
         }
@@ -181,7 +180,10 @@ namespace TowerDefense_TheRPG
             settingMenu.Visible = false;
             volumeBar.Visible = false;
             settingsXbtn.Visible = false;
+            settingsXbtn.Enabled = false;
             settingsBtn.Visible = true;
+            settingsBtn.Enabled = true;
+            this.Focus();
 
         }
 
@@ -190,7 +192,10 @@ namespace TowerDefense_TheRPG
             settingMenu.Visible = true;
             volumeBar.Visible = true;
             settingsXbtn.Visible = true;
+            settingsXbtn.Enabled = true;
             settingsBtn.Visible = false;
+            settingsBtn.Enabled = false;
+            this.Focus();
         }
 
         private void volumeBar_Scroll(object sender, ScrollEventArgs e)
@@ -398,7 +403,7 @@ namespace TowerDefense_TheRPG
                     break;
             }
         }
-        private bool SwapPause(Keys keyCode)
+        private void SwapPause(Keys keyCode)
         {
             if (keyCode == Keys.Escape)
             {
@@ -418,7 +423,6 @@ namespace TowerDefense_TheRPG
                 tmrMoveArrows.Enabled = true;
                 lblPause.Visible = false;
             }
-            return pause;
         }
         #endregion
 
