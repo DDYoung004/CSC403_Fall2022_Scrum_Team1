@@ -130,6 +130,15 @@ namespace TowerDefense_TheRPG
             
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do You Want To Save Your Data", "CodeJuggler", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SaveStats();
+            }
+        }
+
         // buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -470,6 +479,25 @@ namespace TowerDefense_TheRPG
                 tmrMoveArrows.Enabled = true;
                 lblPause.Visible = false;
             }
+        }
+
+        private void SaveStats()
+        {
+            List<Player> playersToSave = new List<Player>();
+
+            playersToSave.Add(player);
+
+            string fileName = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
+
+            XmlHelper.ToXmlFile(playersToSave, fileName);
+        }
+        
+        private void LoadStats()
+        {
+            var playersToLoad = XmlHelper.FromXmlFile<List<Player>>(@"c:\folder\file.xml");
+
+
+
         }
         #endregion
 
