@@ -8,9 +8,7 @@ namespace TowerDefense_TheRPG {
       // To customize application configuration such as set high DPI settings or default font,
       // see https://aka.ms/applicationconfiguration.
       ApplicationConfiguration.Initialize();
-      //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"");
       Application.Run(new FrmMain());
-      // Test Here again
     }
   }
 }
