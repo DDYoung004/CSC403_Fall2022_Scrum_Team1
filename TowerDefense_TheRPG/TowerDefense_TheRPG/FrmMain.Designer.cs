@@ -44,6 +44,10 @@
             this.volumeBar = new System.Windows.Forms.HScrollBar();
             this.settingsBtn = new System.Windows.Forms.Button();
             this.settingMenu.SuspendLayout();
+            this.btn_upSpeed = new System.Windows.Forms.Button();
+            this.tmrBtnFix = new System.Windows.Forms.Timer(this.components);
+            this.tmrRound = new System.Windows.Forms.Timer(this.components);
+            this.btn_upAttack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblStoryLine
@@ -104,8 +108,16 @@
             this.tmrSpawnArrows.Interval = 5000;
             this.tmrSpawnArrows.Tick += new System.EventHandler(this.tmrSpawnArrows_Tick);
             // 
-            // lblPause
+            // tmrBtnFix
+            //
+            this.tmrBtnFix.Tick += new System.EventHandler(this.tmrBtnReset);
             // 
+            // tmrRound
+            //
+            this.tmrRound.Tick += new System.EventHandler(this.round_Tick);
+            //
+            // Pause
+            //
             this.lblPause.BackColor = System.Drawing.Color.Transparent;
             this.lblPause.Font = new System.Drawing.Font("Segoe UI Emoji", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPause.ForeColor = System.Drawing.Color.White;
@@ -172,6 +184,30 @@
             this.settingsBtn.UseVisualStyleBackColor = true;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
+            // btn_upSpeed
+            // 
+            this.btn_upSpeed.AutoSize = true;
+            this.btn_upSpeed.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_upSpeed.Location = new System.Drawing.Point(315, 630);
+            this.btn_upSpeed.Name = "btn_upSpeed";
+            this.btn_upSpeed.Size = new System.Drawing.Size(120, 35);
+            this.btn_upSpeed.TabIndex = 1;
+            this.btn_upSpeed.TabStop = false;
+            this.btn_upSpeed.UseVisualStyleBackColor = true;
+            this.btn_upSpeed.Click += new System.EventHandler(this.upSpeed_Click);
+            // 
+            // btn_upAttack
+            // 
+            this.btn_upAttack.AutoSize = true;
+            this.btn_upAttack.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_upAttack.Location = new System.Drawing.Point(630, 630);
+            this.btn_upAttack.Name = "btn_upAttack";
+            this.btn_upAttack.Size = new System.Drawing.Size(120, 35);
+            this.btn_upAttack.TabIndex = 1;
+            this.btn_upAttack.TabStop = false;
+            this.btn_upAttack.UseVisualStyleBackColor = true;
+            this.btn_upAttack.Click += new System.EventHandler(this.upAttack_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -187,6 +223,8 @@
             this.Controls.Add(this.lblStoryLine);
             this.Controls.Add(this.lblPause);
             this.Controls.Add(this.lblRound);
+            this.Controls.Add(this.btn_upSpeed);
+            this.Controls.Add(this.btn_upAttack);
             this.DoubleBuffered = true;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -208,12 +246,15 @@
         private Button btnStoryLine;
         private System.Windows.Forms.Timer tmrMoveArrows;
         private System.Windows.Forms.Timer tmrSpawnArrows;
+        private System.Windows.Forms.Timer tmrBtnFix;
+        private System.Windows.Forms.Timer tmrRound;
         private Label lblPause;
         internal Panel settingMenu;
         internal HScrollBar volumeBar;
         private Button settingsXbtn;
         private Button settingsBtn;
         private Label lblRound;
-
+        private Button btn_upSpeed;
+        private Button btn_upAttack;
     }
 }

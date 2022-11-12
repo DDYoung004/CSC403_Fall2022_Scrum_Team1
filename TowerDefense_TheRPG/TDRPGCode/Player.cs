@@ -70,7 +70,7 @@
         private void GainLevel()
         {
             Level++;
-            Attack *= 1.5f;
+            //Attack *= 1.5f;
             if (Level <= 3)
             {
                 ChangeCharacterPic("playerL" + Level);
@@ -79,6 +79,44 @@
             {
                 AutoShoot = true;
             }
+        }
+
+        /// <summary>
+        /// Internal function that is automatically called when 
+        /// player upgrades attack
+        /// </summary>
+        public void upgradeAttack()
+        {
+            Attack *= 1.5f;
+        }
+
+        /// <summary>
+        /// Internal function that is automatically called when 
+        /// player upgrades move speed
+        /// </summary>
+        public void upgradeMoveSpeed()
+        {
+            MoveSpeed += 1;
+        }
+
+        /// <summary>
+        /// Call this function whenever the player defeats an <see cref="Enemy"/>
+        /// </summary>
+        /// <param name="moneyGained">How much money the player should gain. 
+        ///                        Use <see cref="Enemy.MoneyGiven"/> for this</param>
+        public void GainMoney(int moneyGained)
+        {
+            Money += moneyGained;
+        }
+
+        /// <summary>
+        /// Call this function whenever the player defeats an <see cref="Enemy"/>
+        /// </summary>
+        /// <param name="moneySpent">How much money the player should gain. 
+        ///                        Use <see cref="Enemy.MoneyGiven"/> for this</param>
+        public void SpendMoney(int moneySpent)
+        {
+            Money -= moneySpent;
         }
     }
 }
