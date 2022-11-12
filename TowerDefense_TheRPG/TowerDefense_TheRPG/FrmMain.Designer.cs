@@ -38,6 +38,7 @@
             this.tmrMoveArrows = new System.Windows.Forms.Timer(this.components);
             this.tmrSpawnArrows = new System.Windows.Forms.Timer(this.components);
             this.lblPause = new System.Windows.Forms.Label();
+            this.lblRound = new System.Windows.Forms.Label();
             this.settingMenu = new System.Windows.Forms.Panel();
             this.settingsXbtn = new System.Windows.Forms.Button();
             this.volumeBar = new System.Windows.Forms.HScrollBar();
@@ -114,10 +115,20 @@
             this.lblPause.TabIndex = 0;
             this.lblPause.Text = "Paused";
             // 
+            // lblRound
+            // 
+            this.lblRound.BackColor = System.Drawing.Color.Transparent;
+            this.lblRound.Font = new System.Drawing.Font("Segoe UI Emoji", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRound.ForeColor = System.Drawing.Color.White;
+            this.lblRound.Location = new System.Drawing.Point(770, 9);
+            this.lblRound.Name = "lblRound";
+            this.lblRound.Size = new System.Drawing.Size(250, 50);
+            this.lblRound.TabIndex = 0;
+            // 
             // settingMenu
             // 
             this.settingMenu.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.settingMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.SettingMenu;
+            this.settingMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.SettingMenu1;
             this.settingMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.settingMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.settingMenu.Controls.Add(this.settingsXbtn);
@@ -175,11 +186,11 @@
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblStoryLine);
             this.Controls.Add(this.lblPause);
+            this.Controls.Add(this.lblRound);
             this.DoubleBuffered = true;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tower Defense The RPG";
-            this.Click += new System.EventHandler(this.settingsXbtn_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.settingMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -202,5 +213,7 @@
         internal HScrollBar volumeBar;
         private Button settingsXbtn;
         private Button settingsBtn;
+        private Label lblRound;
+
     }
 }

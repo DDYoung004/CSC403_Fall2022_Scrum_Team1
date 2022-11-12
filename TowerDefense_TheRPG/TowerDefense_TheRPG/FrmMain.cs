@@ -9,6 +9,7 @@ namespace TowerDefense_TheRPG
     {
         #region Fields
         public MediaPlayer bgMusic;
+        public MediaPlayer rdMusic;
         private string FilePath;
         private Player player;
         private Village village;
@@ -19,6 +20,8 @@ namespace TowerDefense_TheRPG
         private Random rand;
         private bool pause = false;
         private bool inSettings = false;
+        private int round;
+        private bool arrowBefore;
         #endregion
 
         #region Methods
@@ -29,9 +32,12 @@ namespace TowerDefense_TheRPG
             FilePath = Directory.GetCurrentDirectory();
             FilePath = Path.GetFullPath(Path.Combine(FilePath, @"..\..\..\"));
             bgMusic = new MediaPlayer();
+            rdMusic = new MediaPlayer();
             bgMusic.MediaEnded += new EventHandler(BGMusic_Ended);
+            rdMusic.Open(new Uri(FilePath + "data/horn002-106060.wav"));
             bgMusic.Open(new Uri(FilePath + "data/rpg-city-8381.wav"));
             bgMusic.Play();
+            lblRound.Visible = false;
             settingMenu.Visible = false;
             volumeBar.Visible = false;
             volumeBar.Maximum = 100;
@@ -69,21 +75,21 @@ namespace TowerDefense_TheRPG
         private void tmrSpawnEnemies_Tick(object sender, EventArgs e)
         {
             GenEnemyPos(out int x, out int y);
-            int enemyType = rand.Next(4);
+
             Enemy balloon;
-            switch (enemyType)
+            switch (round)
             {
-                case 0:
-                    balloon = Enemy.MakeRedBalloon(x, y);
-                    break;
                 case 1:
-                    balloon = Enemy.MakePurpleBalloon(x, y);
-                    break;
-                case 2:
                     balloon = Enemy.MakeGrayBalloon(x, y);
                     break;
-                default:
+                case 2:
                     balloon = Enemy.MakeOrangeBalloon(x, y);
+                    break;
+                case 3:
+                    balloon = Enemy.MakePurpleBalloon(x, y);
+                    break;
+                default:
+                    balloon = Enemy.MakeRedBalloon(x, y);
                     break;
 
             }
@@ -91,6 +97,7 @@ namespace TowerDefense_TheRPG
         }
         private void tmrMoveEnemies_Tick(object sender, EventArgs e)
         {
+            roundHelper(player.Level, player.XP);
             MoveEnemies();
         }
         private void tmrSpawnArrows_Tick(object sender, EventArgs e)
@@ -145,6 +152,7 @@ namespace TowerDefense_TheRPG
             tmrMoveArrows.Enabled = true;
             tmrTextCrawl.Enabled = false;
             lblPause.Visible = false;
+            lblRound.Visible = true;
 
             // TODO: setting the background image here causes visual defects as enemies and player move
             //       around the screen. Consider either fixing these defects or setting BackgroundImage to null
@@ -171,6 +179,7 @@ namespace TowerDefense_TheRPG
                 tmrMoveEnemies.Enabled = false;
                 tmrMoveArrows.Enabled = false;
                 tmrTextCrawl.Enabled = true;
+                lblPause.Visible = false;
             }
             else
             {
@@ -181,6 +190,7 @@ namespace TowerDefense_TheRPG
                 btnStoryLine.Text = "Show Storyline";
                 lblStoryLine.Visible = false;
                 tmrTextCrawl.Enabled = false;
+                lblPause.Visible = false;
             }
         }
 
@@ -206,13 +216,20 @@ namespace TowerDefense_TheRPG
             settingsBtn.Enabled = false;
             pause = false;
             inSettings = true;
-            SwapPause(Keys.Escape);
+            if (lblRound.Visible)
+                SwapPause(Keys.Escape);
             Focus();
         }
 
         private void volumeBar_Scroll(object sender, ScrollEventArgs e)
         {
             bgMusic.Volume = ((double)volumeBar.Value / 100);
+            rdMusic.Volume = bgMusic.Volume;
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            Focus();
         }
 
 
@@ -234,6 +251,19 @@ namespace TowerDefense_TheRPG
             lblStoryLine.Text = "";
             tmrTextCrawl.Enabled = true;
             curStoryLineIndex = 0;
+        }
+        public int getRound(int level)
+        {
+            if (level % 10 == 0)
+            {
+                rdMusic.Play();
+                round = level / 10;
+            }
+            return round;
+        }
+        public void roundHelper(int level, int xp)
+        {
+            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString());
         }
         public void GenEnemyPos(out int x, out int y)
         {
@@ -427,6 +457,8 @@ namespace TowerDefense_TheRPG
             {
                 tmrSpawnEnemies.Enabled = false;
                 tmrMoveEnemies.Enabled = false;
+                arrowBefore = tmrSpawnArrows.Enabled;
+                tmrSpawnArrows.Enabled = false;
                 tmrMoveArrows.Enabled = false;
                 lblPause.Visible = true;
             }
@@ -434,6 +466,7 @@ namespace TowerDefense_TheRPG
             {
                 tmrSpawnEnemies.Enabled = true;
                 tmrMoveEnemies.Enabled = true;
+                tmrSpawnArrows.Enabled = arrowBefore;
                 tmrMoveArrows.Enabled = true;
                 lblPause.Visible = false;
             }
