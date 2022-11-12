@@ -30,7 +30,7 @@
       balloon.MoveSpeed = 5;
       balloon.SetMaxHealth(0.1f);
       balloon.Attack = 0.5f;
-      balloon.XPGiven = 1;
+      balloon.XPGiven = 2;
       return balloon;
     }
 
@@ -42,10 +42,10 @@
     /// <returns>The purple balloon <see cref="Enemy"/> object</returns>
     public static Enemy MakePurpleBalloon(int x, int y) {
       Enemy balloon = new Enemy("purpleballoon", x, y, 50, 50);
-      balloon.MoveSpeed = 10;
-      balloon.SetMaxHealth(0.5f);
+      balloon.MoveSpeed = 15;
+      balloon.SetMaxHealth(1.0f);
       balloon.Attack = 0.3f;
-      balloon.XPGiven = 3;
+      balloon.XPGiven = 15;
       return balloon;
     }
 
@@ -57,10 +57,10 @@
     /// <returns>The gray balloon <see cref="Enemy"/> object</returns>
     public static Enemy MakeGrayBalloon(int x, int y) {
       Enemy balloon = new Enemy("grayballoon", x, y, 70, 70);
-      balloon.MoveSpeed = 3;
-      balloon.SetMaxHealth(1.0f);
+      balloon.MoveSpeed = 7;
+      balloon.SetMaxHealth(0.5f);
       balloon.Attack = 1f;
-      balloon.XPGiven = 7;
+      balloon.XPGiven = 5;
       return balloon;
     }
 
@@ -73,9 +73,9 @@
     public static Enemy MakeOrangeBalloon(int x, int y) {
       Enemy balloon = new Enemy("orangeballoon", x, y, 100, 100);
       balloon.MoveSpeed = 15;
-      balloon.SetMaxHealth(0.2f);
+      balloon.SetMaxHealth(0.5f);
       balloon.Attack = 0.1f;
-      balloon.XPGiven = 5;
+      balloon.XPGiven = 10;
       return balloon;
     }
   }
