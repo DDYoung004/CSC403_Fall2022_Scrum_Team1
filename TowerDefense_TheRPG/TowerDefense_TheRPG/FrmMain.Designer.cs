@@ -128,7 +128,7 @@
             // settingMenu
             // 
             this.settingMenu.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.settingMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.SettingMenu1;
+            this.settingMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.SettingMenu;
             this.settingMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.settingMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.settingMenu.Controls.Add(this.settingsXbtn);
