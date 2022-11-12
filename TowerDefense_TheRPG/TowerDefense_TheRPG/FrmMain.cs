@@ -494,10 +494,10 @@ namespace TowerDefense_TheRPG
         
         private void LoadStats()
         {
-            var playersToLoad = XmlHelper.FromXmlFile<List<Player>>(@"c:\folder\file.xml");
+            string fileName = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
+            var playersToLoad = XmlHelper.FromXmlFile<List<Player>>(fileName);
 
-
-
+            player = playersToLoad[0];
         }
         #endregion
 
