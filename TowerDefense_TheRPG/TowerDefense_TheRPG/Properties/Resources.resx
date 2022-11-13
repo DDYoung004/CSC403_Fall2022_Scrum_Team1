@@ -157,6 +157,12 @@
   <data name="redballoon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\redballoon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SettingMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\SettingMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="speed_power_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\speed_power_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -165,5 +171,8 @@
   </data>
   <data name="village" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\village.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xbutton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\xbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
