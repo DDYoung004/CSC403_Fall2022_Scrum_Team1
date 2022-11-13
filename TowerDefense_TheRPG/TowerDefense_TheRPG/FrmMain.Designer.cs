@@ -176,7 +176,7 @@
             // 
             this.settingsBtn.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.settings;
             this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.settingsBtn.Location = new System.Drawing.Point(12, 7);;
+            this.settingsBtn.Location = new System.Drawing.Point(12, 7);
             this.settingsBtn.Name = "settingsBtn";
             this.settingsBtn.Size = new System.Drawing.Size(30, 30);
             this.settingsBtn.TabIndex = 1;
