@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TowerDefense_TheRPG.code;
 using TowerDefense_TheRPG.Properties;
-using System.Windows.Media;
 
 namespace TowerDefense_TheRPG
 {
