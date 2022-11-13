@@ -134,51 +134,57 @@
         }
         #endregion
 
-    #region Visuals
-    /// <summary>
-    /// This function will create the picturebox to represent the character, the empty health bar for health
-    /// bar background, and the full red health bar to show current health. It will then create the <see cref="ControlContainer"/>
-    /// and put all those controls into this container. Finally, it uses <see cref="ControlManager.Form"/> to grab a reference
-    /// to the current form and will then add the ControlContainer to this form.
-    /// </summary>
-    private void MakeControls() {
-      ControlContainer = new Panel() {
-        Top = Y,
-        Left = X,
-        Width = Math.Max(W, HEALTH_BAR_WIDTH),
-        Height = H + 30,
-        BackColor = Color.Transparent,
-      };
-      ControlCharacter = new PictureBox() {
-        BackgroundImage = ControlManager.ResMan.GetObject(Name) as Bitmap,
-        BackgroundImageLayout = ImageLayout.Stretch,
-        Width = W,
-        Height = H,
-        BackColor = Color.Transparent,
-      };
-      ControlHealthBarFull = new Label() {
-        Text = "",
-        BackColor = Color.Red,
-        Width = HEALTH_BAR_WIDTH,
-        Height = 15,
-        Top = H + 2,
-        Left = 0,
-      };
-      ControlHealthBarEmpty = new Label() {
-        Text = "",
-        BackColor = Color.Black,
-        BorderStyle = BorderStyle.Fixed3D,
-        Width = HEALTH_BAR_WIDTH,
-        Height = 15,
-        Top = H + 2,
-        Left = 0,
-      };
-      ControlContainer.Controls.Add(ControlCharacter);
-      if (Name != "attack_power_up" && Name != "speed_power_up") {
-                ControlContainer.Controls.Add(ControlHealthBarFull);
-                ControlContainer.Controls.Add(ControlHealthBarEmpty);
-      }
-      ControlManager.Form.Controls.Add(ControlContainer);
+        #region Visuals
+        /// <summary>
+        /// This function will create the picturebox to represent the character, the empty health bar for health
+        /// bar background, and the full red health bar to show current health. It will then create the <see cref="ControlContainer"/>
+        /// and put all those controls into this container. Finally, it uses <see cref="ControlManager.Form"/> to grab a reference
+        /// to the current form and will then add the ControlContainer to this form.
+        /// </summary>
+        private void MakeControls()
+        {
+            ControlContainer = new Panel()
+            {
+                Top = Y,
+                Left = X,
+                Width = Math.Max(W, HEALTH_BAR_WIDTH),
+                Height = H + 30,
+                BackColor = Color.Transparent,
+            };
+            ControlCharacter = new PictureBox()
+            {
+                BackgroundImage = ControlManager.ResMan.GetObject(Name) as Bitmap,
+                BackgroundImageLayout = ImageLayout.Stretch,
+                Width = W,
+                Height = H,
+                BackColor = Color.Transparent,
+            };
+            ControlHealthBarFull = new Label()
+            {
+                Text = "",
+                BackColor = Color.Red,
+                Width = HEALTH_BAR_WIDTH,
+                Height = 15,
+                Top = H + 2,
+                Left = 0,
+            };
+            ControlHealthBarEmpty = new Label()
+            {
+                Text = "",
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Width = HEALTH_BAR_WIDTH,
+                Height = 15,
+                Top = H + 2,
+                Left = 0,
+            };
+            ControlContainer.Controls.Add(ControlCharacter);
+            if (Name != "attack_power_up" && Name != "speed_power_up") 
+            {
+                    ControlContainer.Controls.Add(ControlHealthBarFull);
+                    ControlContainer.Controls.Add(ControlHealthBarEmpty);
+            }
+            ControlManager.Form.Controls.Add(ControlContainer);
     }
 
         /// <summary>
