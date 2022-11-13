@@ -13,7 +13,7 @@ namespace TowerDefense_TheRPG
 {
     public partial class FrmGameOver : Form
     {
-        public FrmGameOver(double volume)
+        public FrmGameOver()
         {
             InitializeComponent();
 
