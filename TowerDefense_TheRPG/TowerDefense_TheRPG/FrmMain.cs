@@ -1,12 +1,16 @@
-using System.Collections.Generic;
 using TowerDefense_TheRPG.code;
 using TowerDefense_TheRPG.Properties;
+using System.Windows.Media;
+
 
 namespace TowerDefense_TheRPG
 {
     public partial class FrmMain : Form
     {
         #region Fields
+        public MediaPlayer bgMusic;
+        public MediaPlayer rdMusic;
+        private string FilePath;
         private Player player;
         private Village village;
         private List<Enemy> enemies;
@@ -16,8 +20,10 @@ namespace TowerDefense_TheRPG
         private string storyLine;
         private int curStoryLineIndex;
         private Random rand;
-        public bool pause = false;
+        private bool pause = false;
+        private bool inSettings = false;
         private int round;
+        private bool arrowBefore;
         #endregion
 
         #region Methods
@@ -25,6 +31,21 @@ namespace TowerDefense_TheRPG
         public FrmMain()
         {
             InitializeComponent();
+            FilePath = Directory.GetCurrentDirectory();
+            FilePath = Path.GetFullPath(Path.Combine(FilePath, @"..\..\..\"));
+            bgMusic = new MediaPlayer();
+            rdMusic = new MediaPlayer();
+            bgMusic.MediaEnded += new EventHandler(BGMusic_Ended);
+            rdMusic.Open(new Uri(FilePath + "data/horn002-106060.wav"));
+            bgMusic.Open(new Uri(FilePath + "data/rpg-city-8381.wav"));
+            bgMusic.Play();
+            lblRound.Visible = false;
+            settingMenu.Visible = false;
+            volumeBar.Visible = false;
+            volumeBar.Maximum = 100;
+            volumeBar.Minimum = 0;
+            volumeBar.Value = (int)(bgMusic.Volume * 100);
+            settingsXbtn.Visible = false;
             FormManager.PushToFormStack(this);
             DoubleBuffered = true;
             ControlManager.ResMan = Resources.ResourceManager;
@@ -34,6 +55,12 @@ namespace TowerDefense_TheRPG
         #endregion
 
         #region Event functions
+        private void BGMusic_Ended(object sender, EventArgs e)
+        {
+            bgMusic.Position = TimeSpan.Zero;
+            bgMusic.Play();
+        }
+
         // timers
         private void tmrTextCrawl_Tick(object sender, EventArgs e)
         {
@@ -50,7 +77,7 @@ namespace TowerDefense_TheRPG
         private void tmrSpawnEnemies_Tick(object sender, EventArgs e)
         {
             GenEnemyPos(out int x, out int y);
-            
+
             Enemy balloon;
             switch (round)
             {
@@ -112,15 +139,29 @@ namespace TowerDefense_TheRPG
         // form
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!pause)
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (inSettings)
+                {
+                    settingsXbtn.PerformClick();
+                }
+                else
+                {
+                    SwapPause(e.KeyCode);
+                }
+            }
+            else if (!pause)
             {
                 PlayerMove(e.KeyCode);
             }
+            
         }
 
         // buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
+            bgMusic.Open(new Uri(FilePath + "data/comatose-114706.wav"));
+            bgMusic.Play();
             BackgroundImage = null;
             btnStart.Visible = false;
             btnStart.Enabled = false;
@@ -158,6 +199,8 @@ namespace TowerDefense_TheRPG
         {
             if (btnStoryLine.Text.StartsWith("Show"))
             {
+                bgMusic.Open(new Uri(FilePath + "data/never-again-108445.wav"));
+                bgMusic.Play();
                 Storyline();
                 BackgroundImage = null;
                 btnStart.Visible = false;
@@ -175,17 +218,56 @@ namespace TowerDefense_TheRPG
             }
             else
             {
+                bgMusic.Open(new Uri(FilePath + "data/rpg-city-8381.wav"));
+                bgMusic.Play();
                 BackgroundImage = Resources.title;
                 btnStart.Visible = true;
                 btnStoryLine.Text = "Show Storyline";
                 lblStoryLine.Visible = false;
                 tmrTextCrawl.Enabled = false;
+                lblPause.Visible = false;
             }
         }
-        private void Pause(object sender, KeyEventArgs e)
+
+        private void settingsXbtn_Click(object sender, EventArgs e)
         {
-            SwapPause(e.KeyCode);
+            settingMenu.Visible = false;
+            volumeBar.Visible = false;
+            settingsXbtn.Visible = false;
+            settingsXbtn.Enabled = false;
+            settingsBtn.Visible = true;
+            settingsBtn.Enabled = true;
+            inSettings = false;
+            Focus();
         }
+
+        private void settingsBtn_Click(object sender, EventArgs e)
+        {
+            settingMenu.Visible = true;
+            volumeBar.Visible = true;
+            settingsXbtn.Visible = true;
+            settingsXbtn.Enabled = true;
+            settingsBtn.Visible = false;
+            settingsBtn.Enabled = false;
+            pause = false;
+            inSettings = true;
+            if (lblRound.Visible)
+                SwapPause(Keys.Escape);
+            Focus();
+        }
+
+        private void volumeBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            bgMusic.Volume = ((double)volumeBar.Value / 100);
+            rdMusic.Volume = bgMusic.Volume;
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            Focus();
+        }
+
+
         #endregion
 
         #region Helper functions 
@@ -206,9 +288,10 @@ namespace TowerDefense_TheRPG
             curStoryLineIndex = 0;
         }
         public int getRound(int level)
-        {   
+        {
             if (level % 10 == 0)
             {
+                rdMusic.Play();
                 round = level / 10;
             }
             return round;
@@ -337,7 +420,8 @@ namespace TowerDefense_TheRPG
                     if (village.CurHealth <= 0)
                     {
                         village.Hide(); // defeated
-                        Form frmGO = new FrmGameOver();
+                        bgMusic.Stop();
+                        Form frmGO = new FrmGameOver(bgMusic.Volume);
                         frmGO.Show();
                         this.Hide();
                         FormManager.PushToFormStack(frmGO);
@@ -430,9 +514,12 @@ namespace TowerDefense_TheRPG
                 case Keys.D:
                     player.Move(+1, 0);
                     break;
+                case Keys.Escape:
+                    SwapPause(Keys.Escape);
+                    break;
             }
         }
-        private bool SwapPause(Keys keyCode)
+        private void SwapPause(Keys keyCode)
         {
             if (keyCode == Keys.Escape)
             {
@@ -442,6 +529,8 @@ namespace TowerDefense_TheRPG
             {
                 tmrSpawnEnemies.Enabled = false;
                 tmrMoveEnemies.Enabled = false;
+                arrowBefore = tmrSpawnArrows.Enabled;
+                tmrSpawnArrows.Enabled = false;
                 tmrMoveArrows.Enabled = false;
                 lblPause.Visible = true;
             }
@@ -449,12 +538,13 @@ namespace TowerDefense_TheRPG
             {
                 tmrSpawnEnemies.Enabled = true;
                 tmrMoveEnemies.Enabled = true;
+                tmrSpawnArrows.Enabled = arrowBefore;
                 tmrMoveArrows.Enabled = true;
                 lblPause.Visible = false;
             }
-            return pause;
         }
         #endregion
+
         #endregion
     }
 }
