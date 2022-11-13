@@ -130,9 +130,10 @@ namespace TowerDefense_TheRPG
             
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do You Want To Save Your Data", "CodeJuggler", MessageBoxButtons.YesNo);
+            SwapPause(Keys.Escape);
+            DialogResult dialogResult = MessageBox.Show("Save Player?", "CodeJuggler", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 SaveStats();
@@ -171,6 +172,16 @@ namespace TowerDefense_TheRPG
             // otherwise, for whatever reason, the start button retains focus (even when enabled = false)
             // and arrow key presses are ignored and won't move player.
             Focus();
+
+            string path = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
+            if (File.Exists(path))
+            {
+                DialogResult dialogResult = MessageBox.Show("Do You Want To Load Your Previous Player", "CodeJuggler", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    LoadStats();
+                }
+            }
         }
         private void btnStoryLine_Click(object sender, EventArgs e)
         {
@@ -494,10 +505,14 @@ namespace TowerDefense_TheRPG
         
         private void LoadStats()
         {
+            List<Player> playersToLoad;
             string fileName = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
-            var playersToLoad = XmlHelper.FromXmlFile<List<Player>>(fileName);
+            playersToLoad = XmlHelper.FromXmlFile<List<Player>>(fileName);
 
-            player = playersToLoad[0];
+            if (playersToLoad?.Any() == true)
+            {
+                player = playersToLoad[0];
+            }
         }
         #endregion
 
