@@ -1,4 +1,9 @@
-﻿namespace TowerDefense_TheRPG.code {
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
+using System.Xml;
+
+namespace TowerDefense_TheRPG.code {
   /// <summary>
   /// Base character class. Inherits from <see cref="Stats">Stats</see>.
   /// <see cref="Enemy"/>, <see cref="Player"/> and <see cref="Village"/> inherit from this class.
@@ -6,11 +11,16 @@
   /// instantiate it
   /// </summary>
   public class Character : Stats {
-    #region Properties
+        #region Properties
+        /// <summary>
+        /// Name of this character. This is used to look up an image in resources
+        /// </summary>
+       public string Name { get; set; }
+
     /// <summary>
-    /// Name of this character. This is used to look up an image in resources
+    /// This is the name the user selects for themself. Not related to the other Name attribute.
     /// </summary>
-    public string Name { get; set; }
+    public string UserName { get; set;}
 
     /// <summary>
     /// Current X (aka left) position
@@ -49,6 +59,7 @@
     private Control ControlCharacter;
     private Control ControlHealthBarFull;
     private Control ControlHealthBarEmpty;
+        private Control ControlUsernameBar;
     private const int HEALTH_BAR_WIDTH = 50;
     private int lastMoveDirX;
     private int lastMoveDirY;
@@ -123,50 +134,68 @@
       CurHealth -= amount;
       UpdateHealth();
     }
-    #endregion
+        #endregion
 
-    #region Visuals
-    /// <summary>
-    /// This function will create the picturebox to represent the character, the empty health bar for health
-    /// bar background, and the full red health bar to show current health. It will then create the <see cref="ControlContainer"/>
-    /// and put all those controls into this container. Finally, it uses <see cref="ControlManager.Form"/> to grab a reference
-    /// to the current form and will then add the ControlContainer to this form.
-    /// </summary>
-    private void MakeControls() {
-      ControlContainer = new Panel() {
-        Top = Y,
-        Left = X,
-        Width = Math.Max(W, HEALTH_BAR_WIDTH),
-        Height = H + 30,
-        BackColor = Color.Transparent,
-      };
-      ControlCharacter = new PictureBox() {
-        BackgroundImage = ControlManager.ResMan.GetObject(Name) as Bitmap,
-        BackgroundImageLayout = ImageLayout.Stretch,
-        Width = W,
-        Height = H,
-        BackColor = Color.Transparent,
-      };
-      ControlHealthBarFull = new Label() {
-        Text = "",
-        BackColor = Color.Red,
-        Width = HEALTH_BAR_WIDTH,
-        Height = 15,
-        Top = H + 2,
-        Left = 0,
-      };
-      ControlHealthBarEmpty = new Label() {
-        Text = "",
-        BackColor = Color.Black,
-        BorderStyle = BorderStyle.Fixed3D,
-        Width = HEALTH_BAR_WIDTH,
-        Height = 15,
-        Top = H + 2,
-        Left = 0,
-      };
-      ControlContainer.Controls.Add(ControlCharacter);
+        #region Visuals
+        /// <summary>
+        /// This function will create the picturebox to represent the character, the empty health bar for health
+        /// bar background, and the full red health bar to show current health. It will then create the <see cref="ControlContainer"/>
+        /// and put all those controls into this container. Finally, it uses <see cref="ControlManager.Form"/> to grab a reference
+        /// to the current form and will then add the ControlContainer to this form.
+        /// </summary>
+        private void MakeControls() {
+            ControlContainer = new Panel() {
+                Top = Y,
+                Left = X,
+                Width = Math.Max(W, HEALTH_BAR_WIDTH),
+                Height = H + 30,
+                BackColor = Color.Transparent,
+            };
+            ControlCharacter = new PictureBox() {
+                BackgroundImage = ControlManager.ResMan.GetObject(Name) as Bitmap,
+                BackgroundImageLayout = ImageLayout.Stretch,
+                Width = W,
+                Height = H,
+                BackColor = Color.Transparent,
+            };
+            ControlHealthBarFull = new Label() {
+                Text = "",
+                BackColor = Color.Red,
+                Width = HEALTH_BAR_WIDTH,
+                Height = 15,
+                Top = H + 2,
+                Left = 0,
+            };
+            ControlHealthBarEmpty = new Label() {
+                Text = "",
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Width = HEALTH_BAR_WIDTH,
+                Height = 15,
+                Top = H + 2,
+                Left = 0,
+            };
+            if (Name.Contains("player"))
+            {
+                ControlUsernameBar = new Label()
+                {
+                    Text = "yeah",
+                    BackColor = Color.Transparent,
+                    BorderStyle = BorderStyle.Fixed3D,
+                    Width = HEALTH_BAR_WIDTH,
+                    Height = 15,
+                    Top = H + 2,
+                    Left = 0,
+                };
+                ControlContainer.Controls.Add(ControlUsernameBar);
+            }
+            ControlContainer.Controls.Add(ControlCharacter);
       ControlContainer.Controls.Add(ControlHealthBarFull);
       ControlContainer.Controls.Add(ControlHealthBarEmpty);
+
+       // supposed to be the name label above character
+   
+         
       ControlManager.Form.Controls.Add(ControlContainer);
     }
 

@@ -84,6 +84,12 @@ namespace TowerDefense_TheRPG {
       enemies = new List<Enemy>();
       arrows = new List<Arrow>();
       player = new Player(Width / 2, Height / 2 + 100);
+      
+      // set the player's name from the input field in the start screen     
+      player.Name = usernameBox.Text;
+      // at start, the textbox will override controls and prevent the player from being able to move, so hide it and disable it (no need to view it on screen afterwards, just have an element follow the player around, above them
+      usernameBox.Hide();
+      usernameBox.Enabled = false;
       village = new Village(Width / 2 - 80, Height / 2 - 50);
       village.ControlContainer.SendToBack();
       tmrSpawnEnemies.Enabled = true;
@@ -288,7 +294,23 @@ namespace TowerDefense_TheRPG {
           break;
       }
     }
-    #endregion
-    #endregion
-  }
+        #endregion
+
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStoryLine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            // no need to do anything, just have the textBox1.text attribute grabbed when the game starts, and display this overhead. 
+        }
+    }
 }

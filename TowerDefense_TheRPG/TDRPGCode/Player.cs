@@ -1,4 +1,5 @@
-﻿namespace TowerDefense_TheRPG.code {
+﻿using TowerDefense_TheRPG;
+namespace TowerDefense_TheRPG.code {
   /// <summary>
   /// Class for our player
   /// </summary>
@@ -32,7 +33,7 @@
     /// </summary>
     /// <param name="x">Initial x position of player</param>
     /// <param name="y">Initial y position of player</param>
-    public Player(int x, int y) : base("player", x, y, 50, 100) {
+    public Player(int x, int y) : base("player", x, y, 50, 130) { 
       SetMaxHealth(1.0f);
       Money = 0;
       Attack = 0.15f;
