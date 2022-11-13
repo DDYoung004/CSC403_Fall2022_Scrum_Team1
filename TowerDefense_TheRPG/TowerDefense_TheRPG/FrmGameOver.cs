@@ -16,7 +16,6 @@ namespace TowerDefense_TheRPG
         public FrmGameOver()
         {
             InitializeComponent();
-
         }
 
         private void FrmGameOver_FormClosing(object sender, FormClosingEventArgs e)
