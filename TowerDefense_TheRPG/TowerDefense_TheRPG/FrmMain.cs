@@ -1,6 +1,7 @@
 using TowerDefense_TheRPG.code;
 using TowerDefense_TheRPG.Properties;
 using System.Windows.Media;
+using System.Data;
 
 
 namespace TowerDefense_TheRPG
@@ -173,8 +174,8 @@ namespace TowerDefense_TheRPG
             // and arrow key presses are ignored and won't move player.
             Focus();
 
-            string path = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
-            if (File.Exists(path))
+            // string path = String.Format(@"{0}\SavedPlayer.txt", Application.StartupPath);
+            if (File.Exists("SavedPlayer.txt"))
             {
                 DialogResult dialogResult = MessageBox.Show("Do You Want To Load Your Previous Player", "CodeJuggler", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
@@ -494,24 +495,113 @@ namespace TowerDefense_TheRPG
 
         private void SaveStats()
         {
-            List<Player> playersToSave = new List<Player>();
+            // create/overwrite the text file
+            TextWriter tw = new StreamWriter("SavedPlayer.txt");
 
-            playersToSave.Add(player);
+            // write lines of text to the file
+            tw.WriteLine(player.Money);
+            tw.WriteLine(player.XP);
+            tw.WriteLine(player.Level);
+            tw.WriteLine(player.AutoShoot);
+            tw.WriteLine(player.Attack);
+            tw.WriteLine(player.MaxHealth);
+            tw.WriteLine(player.CurHealth);
+            tw.WriteLine(player.MoveSpeed);
 
-            string fileName = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
-
-            XmlHelper.ToXmlFile(playersToSave, fileName);
+            // close the stream     
+            tw.Close();
         }
-        
+
         private void LoadStats()
         {
-            List<Player> playersToLoad;
-            string fileName = String.Format(@"{0}\PlayerSave.xml", Application.StartupPath);
-            playersToLoad = XmlHelper.FromXmlFile<List<Player>>(fileName);
+            // create reader & open file
+            TextReader tr = new StreamReader("SavedPlayer.txt");
 
-            if (playersToLoad?.Any() == true)
+            // read lines of text
+            string money = tr.ReadLine();
+            string xp = tr.ReadLine();
+            string lvl = tr.ReadLine();
+            string auto_shoot = tr.ReadLine();
+            string attack = tr.ReadLine();
+            string max_health = tr.ReadLine();
+            string curr_health = tr.ReadLine();
+            string move_speed = tr.ReadLine();
+
+            //Convert the strings to int, bool, or float
+            int one;
+            if (int.TryParse(money, out one))
             {
-                player = playersToLoad[0];
+                player.Money = one;
+                Console.WriteLine("Money: " + one);
+            }
+            if (int.TryParse(xp, out one))
+            {
+                player.XP = one;
+                Console.WriteLine("XP: " + one);
+            }
+            if (int.TryParse(lvl, out one))
+            {
+                player.Level = one;
+                Console.WriteLine("Level: " + one);
+            }
+            bool two;
+            if (bool.TryParse(auto_shoot, out two))
+            {
+                player.AutoShoot = two;
+                Console.WriteLine("AutoShoot: " + two);
+            }
+            float three;
+            if (float.TryParse(attack, out three))
+            {
+                player.Attack = three;
+                Console.WriteLine("Attack: " + three);
+            }
+            if (float.TryParse(max_health, out three))
+            {
+                player.MaxHealth = three;
+                Console.WriteLine("MaxHealth: " + three);
+            }
+            if (float.TryParse(curr_health, out three))
+            {
+                player.CurHealth = three;
+                Console.WriteLine("CurHealth: " + three);
+            }
+            if (int.TryParse(move_speed, out one))
+            {
+                player.MoveSpeed = one;
+                Console.WriteLine("MoveSpeed: " + one);
+            }
+
+            // close the stream
+            tr.Close();
+
+            UpdateStats();
+        }
+
+        /// <summary>
+        /// function used to update things related to stats when you load a previous save
+        /// </summary>
+        public void UpdateStats()
+        {
+            if (player.Level <= 3)
+            {
+                player.UpdatePic("playerL" + player.Level);
+            }
+            if (player.Level >= 2)
+            {
+                player.AutoShoot = true;
+            }
+            if (player.Level == 2)
+            {
+                tmrSpawnArrows.Enabled = true;
+                tmrMoveArrows.Enabled = true;
+                FireArrows();
+            }
+            else if (player.Level == 3)
+            {
+                tmrSpawnArrows.Interval = 2500;
+                tmrSpawnArrows.Enabled = true;
+                FireArrows();
             }
         }
         #endregion

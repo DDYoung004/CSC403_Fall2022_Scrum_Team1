@@ -9,25 +9,25 @@
         /// Amount of money the player has. Currently this is not being
         /// used but you could add this as a feature.
         /// </summary>
-        public int Money { get; private set; }
+        public int Money { get; set; }
 
         /// <summary>
         /// Current amount of experience. You gain experience by defeating
         /// <see cref="Enemy"/> objects (e.g. balloons)
         /// </summary>
-        public int XP { get; private set; }
+        public int XP { get; set; }
 
         /// <summary>
         /// Current level player has
         /// </summary>
-        public int Level { get; private set; }
+        public int Level { get; set; }
 
         /// <summary>
         /// If this is set to true, player will automatically shoot arrows
         /// every so often (the time interval is set as the Interval property
         /// of the tmrSpawnArrows object in FrmMain)
         /// </summary>
-        public bool AutoShoot { get; private set; }
+        public bool AutoShoot { get; set; }
 
         /// <summary>
         /// Explicit constructor
@@ -79,6 +79,15 @@
             {
                 AutoShoot = true;
             }
+        }
+
+        /// <summary>
+        /// used to access ChangeCharacterPic function from FrmMain
+        /// </summary>
+        /// <param name="resourceName"></param> The name of the resource file.
+        public void UpdatePic(string resourceName)
+        {
+            ChangeCharacterPic(resourceName);
         }
     }
 }
