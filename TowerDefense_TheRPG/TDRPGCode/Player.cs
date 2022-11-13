@@ -42,7 +42,10 @@
             MoveSpeed = 15;
             Level = 1;
             XP = 0;
-            ChangeCharacterPic("playerL" + Level);
+            if (Level <= 3)
+            {
+                ChangeCharacterPic("playerL" + Level);
+            }
         }
 
         /// <summary>
@@ -53,14 +56,11 @@
         public void GainXP(int xpGained)
         {
             XP += xpGained;
-            if (XP > 10 && Level == 1)
+            if (XP >= (10 * Level) + 10)
             {
                 GainLevel();
             }
-            else if (XP > 30 && Level == 2)
-            {
-                GainLevel();
-            }
+
         }
 
         /// <summary>
@@ -109,7 +109,10 @@
         {
             Level++;
             Attack *= 1.5f;
-            ChangeCharacterPic("playerL" + Level);
+            if (Level <= 3)
+            {
+                ChangeCharacterPic("playerL" + Level);
+            }
             if (Level >= 2)
             {
                 AutoShoot = true;
