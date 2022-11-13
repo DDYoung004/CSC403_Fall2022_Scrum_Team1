@@ -514,7 +514,7 @@ namespace TowerDefense_TheRPG
 
         private void LoadStats()
         {
-            // create reader & open file
+            // create reader and open file
             TextReader tr = new StreamReader("SavedPlayer.txt");
 
             // read lines of text
