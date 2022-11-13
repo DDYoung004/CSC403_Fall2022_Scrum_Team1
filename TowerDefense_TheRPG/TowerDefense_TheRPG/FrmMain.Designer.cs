@@ -79,7 +79,7 @@
             // 
             // tmrSpawnEnemies
             // 
-            this.tmrSpawnEnemies.Interval = 3000;
+            //this.tmrSpawnEnemies.Interval = 3000;
             this.tmrSpawnEnemies.Tick += new System.EventHandler(this.tmrSpawnEnemies_Tick);
             // 
             // tmrMoveEnemies
@@ -132,9 +132,9 @@
             this.lblRound.BackColor = System.Drawing.Color.Transparent;
             this.lblRound.Font = new System.Drawing.Font("Segoe UI Emoji", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblRound.ForeColor = System.Drawing.Color.White;
-            this.lblRound.Location = new System.Drawing.Point(770, 9);
+            //this.lblRound.Location = new System.Drawing.Point(770, 9);
             this.lblRound.Name = "lblRound";
-            this.lblRound.Size = new System.Drawing.Size(250, 50);
+            this.lblRound.Size = new System.Drawing.Size(350, 50);
             this.lblRound.TabIndex = 0;
             // 
             // settingMenu
@@ -176,7 +176,7 @@
             // 
             this.settingsBtn.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.settings;
             this.settingsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.settingsBtn.Location = new System.Drawing.Point(1107, 9);
+            this.settingsBtn.Location = new System.Drawing.Point(12, 7);;
             this.settingsBtn.Name = "settingsBtn";
             this.settingsBtn.Size = new System.Drawing.Size(30, 30);
             this.settingsBtn.TabIndex = 1;
@@ -188,7 +188,7 @@
             // 
             this.btn_upSpeed.AutoSize = true;
             this.btn_upSpeed.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_upSpeed.Location = new System.Drawing.Point(315, 630);
+            //this.btn_upSpeed.Location = new System.Drawing.Point(315, 630);
             this.btn_upSpeed.Name = "btn_upSpeed";
             this.btn_upSpeed.Size = new System.Drawing.Size(120, 35);
             this.btn_upSpeed.TabIndex = 1;
@@ -200,7 +200,7 @@
             // 
             this.btn_upAttack.AutoSize = true;
             this.btn_upAttack.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_upAttack.Location = new System.Drawing.Point(630, 630);
+            //this.btn_upAttack.Location = new System.Drawing.Point(630, 630);
             this.btn_upAttack.Name = "btn_upAttack";
             this.btn_upAttack.Size = new System.Drawing.Size(120, 35);
             this.btn_upAttack.TabIndex = 1;
