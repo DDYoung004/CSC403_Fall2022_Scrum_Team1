@@ -179,13 +179,13 @@
                 Left = 0,
             };
             ControlContainer.Controls.Add(ControlCharacter);
-            if (Name != "attack_power_up" && Name != "speed_power_up") 
+            if (Name != "attack_power_up" && Name != "speed_power_up")
             {
-                    ControlContainer.Controls.Add(ControlHealthBarFull);
-                    ControlContainer.Controls.Add(ControlHealthBarEmpty);
+                ControlContainer.Controls.Add(ControlHealthBarFull);
+                ControlContainer.Controls.Add(ControlHealthBarEmpty);
             }
             ControlManager.Form.Controls.Add(ControlContainer);
-    }
+        }
 
         /// <summary>
         /// This will force a change of the image being displayed for this character. This is used
@@ -269,7 +269,6 @@
                 Move(-lastMoveDirX, -lastMoveDirY, false);
             }
         }
-        
         #endregion
         #endregion
     }

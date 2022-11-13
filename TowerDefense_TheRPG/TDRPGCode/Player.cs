@@ -56,11 +56,11 @@
         public void GainXP(int xpGained)
         {
             XP += xpGained;
-            if (XP >= (10*Level)+10)
+            if (XP >= (10 * Level) + 10)
             {
                 GainLevel();
             }
-            
+
         }
 
         /// <summary>
@@ -70,13 +70,16 @@
         ///                        Use <see cref="PowerUp.StatsMultiplier"/> for this</param>
         /// <param name="statsType">which stats the player should gain. 
         ///                        Use <see cref="PowerUp.StatsType"/> for this</param>
-        public void GainTempStats(int statsMult, string statsType) {
-          if (statsType == "Attack") {
-                    Attack += statsMult;
-          }
-          if (statsType == "MoveSpeed") {
-                    MoveSpeed += statsMult;
-          }
+        public void GainTempStats(int statsMult, string statsType)
+        {
+            if (statsType == "Attack")
+            {
+                Attack += statsMult;
+            }
+            if (statsType == "MoveSpeed")
+            {
+                MoveSpeed += statsMult;
+            }
         }
 
         /// <summary>
@@ -86,13 +89,16 @@
         ///                        Use <see cref="PowerUp.StatsMultiplier"/> for this</param>
         /// <param name="statsType">which stats the player should gain. 
         ///                        Use <see cref="PowerUp.StatsType"/> for this</param>
-        public void RemoveTempStats(int statsMult, string statsType) {
-          if (statsType == "Attack") {
-                    Attack -= statsMult;
-          }
-          if (statsType == "MoveSpeed") {
-                    MoveSpeed -= statsMult;
-          }
+        public void RemoveTempStats(int statsMult, string statsType)
+        {
+            if (statsType == "Attack")
+            {
+                Attack -= statsMult;
+            }
+            if (statsType == "MoveSpeed")
+            {
+                MoveSpeed -= statsMult;
+            }
         }
 
         /// <summary>

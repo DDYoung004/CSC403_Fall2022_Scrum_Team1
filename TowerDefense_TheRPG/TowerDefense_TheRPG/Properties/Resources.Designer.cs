@@ -91,6 +91,15 @@ namespace TowerDefense_TheRPG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream comatose_114706 {
+            get {
+                return ResourceManager.GetStream("comatose_114706", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap gameover {
@@ -117,6 +126,33 @@ namespace TowerDefense_TheRPG.Properties {
             get {
                 object obj = ResourceManager.GetObject("ground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream hopeless_119866 {
+            get {
+                return ResourceManager.GetStream("hopeless_119866", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream horn002_106060 {
+            get {
+                return ResourceManager.GetStream("horn002_106060", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream never_again_108445 {
+            get {
+                return ResourceManager.GetStream("never_again_108445", resourceCulture);
             }
         }
         
@@ -191,6 +227,35 @@ namespace TowerDefense_TheRPG.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream rpg_city_8381 {
+            get {
+                return ResourceManager.GetStream("rpg_city_8381", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingMenu {
+            get {
+                object obj = ResourceManager.GetObject("SettingMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings {
+            get {
+                object obj = ResourceManager.GetObject("settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap speed_power_up {
@@ -216,6 +281,16 @@ namespace TowerDefense_TheRPG.Properties {
         internal static System.Drawing.Bitmap village {
             get {
                 object obj = ResourceManager.GetObject("village", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap xbutton {
+            get {
+                object obj = ResourceManager.GetObject("xbutton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
