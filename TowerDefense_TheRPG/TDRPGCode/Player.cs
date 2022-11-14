@@ -6,28 +6,27 @@
     public class Player : Character
     {
         /// <summary>
-        /// Amount of money the player has. Currently this is not being
-        /// used but you could add this as a feature.
+        /// Amount of money the player has.
         /// </summary>
-        public int Money { get; private set; }
+        public int Money { get; set; }
 
         /// <summary>
         /// Current amount of experience. You gain experience by defeating
         /// <see cref="Enemy"/> objects (e.g. balloons)
         /// </summary>
-        public int XP { get; private set; }
+        public int XP { get; set; }
 
         /// <summary>
         /// Current level player has
         /// </summary>
-        public int Level { get; private set; }
+        public int Level { get; set; }
 
         /// <summary>
         /// If this is set to true, player will automatically shoot arrows
         /// every so often (the time interval is set as the Interval property
         /// of the tmrSpawnArrows object in FrmMain)
         /// </summary>
-        public bool AutoShoot { get; private set; }
+        public bool AutoShoot { get; set; }
 
         /// <summary>
         /// Explicit constructor
@@ -108,7 +107,7 @@
         private void GainLevel()
         {
             Level++;
-            Attack *= 1.5f;
+            //Attack *= 1.5f;
             if (Level <= 3)
             {
                 ChangeCharacterPic("playerL" + Level);
@@ -117,6 +116,53 @@
             {
                 AutoShoot = true;
             }
+        }
+
+        /// <summary>
+        /// used to access ChangeCharacterPic function from FrmMain
+        /// </summary>
+        /// <param name="resourceName"></param> The name of the resource file.
+        public void UpdatePic(string resourceName)
+        {
+            ChangeCharacterPic(resourceName);
+        }
+
+        /// <summary>
+        /// Internal function that is automatically called when 
+        /// player upgrades attack
+        /// </summary>
+        public void upgradeAttack()
+        {
+            Attack *= 1.5f;
+        }
+
+        /// <summary>
+        /// Internal function that is automatically called when 
+        /// player upgrades move speed
+        /// </summary>
+        public void upgradeMoveSpeed()
+        {
+            MoveSpeed += 1;
+        }
+
+        /// <summary>
+        /// Call this function whenever the player defeats an <see cref="Enemy"/>
+        /// </summary>
+        /// <param name="moneyGained">How much money the player should gain. 
+        ///                        Use <see cref="Enemy.MoneyGiven"/> for this</param>
+        public void GainMoney(int moneyGained)
+        {
+            Money += moneyGained;
+        }
+
+        /// <summary>
+        /// Call this function whenever the player defeats an <see cref="Enemy"/>
+        /// </summary>
+        /// <param name="moneySpent">How much money the player should gain. 
+        ///                        Use <see cref="Enemy.MoneyGiven"/> for this</param>
+        public void SpendMoney(int moneySpent)
+        {
+            Money -= moneySpent;
         }
     }
 }
