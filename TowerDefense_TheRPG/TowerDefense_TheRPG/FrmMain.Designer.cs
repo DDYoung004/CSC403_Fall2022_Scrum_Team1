@@ -170,6 +170,7 @@
             // 
             // statsMenu
             // 
+            this.statsMenu.BackColor = System.Drawing.Color.DarkSlateGray;
             this.statsMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.StatsMenu;
             this.statsMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.statsMenu.Controls.Add(this.moneyLabel);
