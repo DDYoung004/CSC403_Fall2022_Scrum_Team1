@@ -703,17 +703,21 @@ namespace TowerDefense_TheRPG
             {
                 player.UpdatePic("playerL" + player.Level);
             }
+            else if (player.Level > 3)
+            {
+                player.UpdatePic("playerL3");
+            }
             if (player.Level >= 2)
             {
                 player.AutoShoot = true;
             }
-            if (player.Level == 2)
+            if (player.Level >= 2)
             {
                 tmrSpawnArrows.Enabled = true;
                 tmrMoveArrows.Enabled = true;
                 FireArrows();
             }
-            else if (player.Level == 3)
+            if (player.Level >= 3)
             {
                 tmrSpawnArrows.Interval = 2500;
                 tmrSpawnArrows.Enabled = true;
