@@ -134,7 +134,7 @@ namespace TowerDefense_TheRPG
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             SwapPause(Keys.Escape);
-            DialogResult dialogResult = MessageBox.Show("Save Player?", "CodeJuggler", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Save Player?", "Saver", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 SaveStats();
@@ -177,7 +177,7 @@ namespace TowerDefense_TheRPG
             // string path = String.Format(@"{0}\SavedPlayer.txt", Application.StartupPath);
             if (File.Exists("SavedPlayer.txt"))
             {
-                DialogResult dialogResult = MessageBox.Show("Do You Want To Load Your Previous Player", "CodeJuggler", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Do You Want To Load Your Previous Player", "Loader", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     LoadStats();
