@@ -236,6 +236,14 @@ namespace TowerDefense_TheRPG
             power_up_temp = new List<Tuple<int, string>>();
             arrows = new List<Arrow>();
             player = new Player(Width / 2, Height / 2 + 100);
+            player.Name = textBox1.Text; // set player name attribute from the text box on the start screen
+            textBox1.Visible = false; // have to hide element so that it does not override player controls (it will)
+            textBox1.Enabled = false; // see previous comment above
+            label1.Visible = false; // also have to hide this
+            player.ControlNameLabel.Text = player.Name;
+            player.ControlNameLabel.Visible = true;
+            player.ControlHealthBarFull.Visible = false;
+            player.ControlHealthBarEmpty.Visible = false;
             village = new Village(Width / 2 - 80, Height / 2 - 50);
             village.ControlContainer.SendToBack();
             tmrSpawnEnemies.Enabled = true;
@@ -800,5 +808,17 @@ namespace TowerDefense_TheRPG
 
         #endregion
 
+<<<<<<< Updated upstream
+=======
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+>>>>>>> Stashed changes
     }
 }
