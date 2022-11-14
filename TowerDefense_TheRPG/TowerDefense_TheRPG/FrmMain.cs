@@ -152,6 +152,9 @@ namespace TowerDefense_TheRPG
         private void round_Tick(object sender, EventArgs e)
         {
             CenterVillage();
+            attackLabel.Text = ((float)player.Attack).ToString("0.00");
+            speedLabel.Text = ((float)player.MoveSpeed).ToString();
+            moneyLabel.Text = "$" + player.Money.ToString();
             btn_upSpeed.Location = new System.Drawing.Point(((Width / 2) - 300), ((Height / 2) + 300));
             btn_upAttack.Location = new System.Drawing.Point(((Width / 2) + 100), ((Height / 2) + 300));
             lblRound.Location = new System.Drawing.Point(((Width / 2) - 150), ((Height / 2) - 400));
@@ -318,7 +321,6 @@ namespace TowerDefense_TheRPG
             SwapPause(e.KeyCode);
         }
 
-
         #endregion
 
         #region Helper functions 
@@ -354,7 +356,7 @@ namespace TowerDefense_TheRPG
         }
         public void roundHelper(int level, int xp, int money)
         {
-            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString() + " | $:" + money.ToString());
+            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString());
         }
         public void GenEnemyPos(out int x, out int y)
         {
@@ -559,6 +561,10 @@ namespace TowerDefense_TheRPG
                 btn_upSpeed.Enabled = true;
                 btn_upAttack.Enabled = true;
                 btn_upAttack.Visible = true;
+                attackLabel.Visible = true;
+                speedLabel.Visible = true;
+                moneyLabel.Visible = true;
+                statsMenu.Visible = true;
                 btn_upSpeed.Text = "SPD^ $" + MoneySpeedCounter.ToString();
                 btn_upAttack.Text = "ATK^ $" + MoneyAttackCounter.ToString();
             }
@@ -572,6 +578,10 @@ namespace TowerDefense_TheRPG
                 btn_upSpeed.Enabled = false;
                 btn_upAttack.Enabled = false;
                 btn_upAttack.Visible = false;
+                attackLabel.Visible = false;
+                speedLabel.Visible = false;
+                moneyLabel.Visible = false;
+                statsMenu.Visible = false;
                 lblPause.Visible = false;
                 tmrBtnFix.Enabled = false;
             }
@@ -579,5 +589,6 @@ namespace TowerDefense_TheRPG
         #endregion
 
         #endregion
+
     }
 }

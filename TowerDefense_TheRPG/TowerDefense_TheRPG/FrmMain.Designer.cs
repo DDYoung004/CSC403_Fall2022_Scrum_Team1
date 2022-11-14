@@ -42,12 +42,17 @@
             this.settingMenu = new System.Windows.Forms.Panel();
             this.settingsXbtn = new System.Windows.Forms.Button();
             this.volumeBar = new System.Windows.Forms.HScrollBar();
+            this.statsMenu = new System.Windows.Forms.Panel();
+            this.moneyLabel = new System.Windows.Forms.Label();
+            this.speedLabel = new System.Windows.Forms.Label();
+            this.attackLabel = new System.Windows.Forms.Label();
             this.settingsBtn = new System.Windows.Forms.Button();
-            this.settingMenu.SuspendLayout();
             this.btn_upSpeed = new System.Windows.Forms.Button();
             this.tmrBtnFix = new System.Windows.Forms.Timer(this.components);
             this.tmrRound = new System.Windows.Forms.Timer(this.components);
             this.btn_upAttack = new System.Windows.Forms.Button();
+            this.settingMenu.SuspendLayout();
+            this.statsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStoryLine
@@ -79,7 +84,6 @@
             // 
             // tmrSpawnEnemies
             // 
-            //this.tmrSpawnEnemies.Interval = 3000;
             this.tmrSpawnEnemies.Tick += new System.EventHandler(this.tmrSpawnEnemies_Tick);
             // 
             // tmrMoveEnemies
@@ -108,16 +112,8 @@
             this.tmrSpawnArrows.Interval = 5000;
             this.tmrSpawnArrows.Tick += new System.EventHandler(this.tmrSpawnArrows_Tick);
             // 
-            // tmrBtnFix
-            //
-            this.tmrBtnFix.Tick += new System.EventHandler(this.tmrBtnReset);
+            // lblPause
             // 
-            // tmrRound
-            //
-            this.tmrRound.Tick += new System.EventHandler(this.round_Tick);
-            //
-            // Pause
-            //
             this.lblPause.BackColor = System.Drawing.Color.Transparent;
             this.lblPause.Font = new System.Drawing.Font("Segoe UI Emoji", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPause.ForeColor = System.Drawing.Color.White;
@@ -132,7 +128,7 @@
             this.lblRound.BackColor = System.Drawing.Color.Transparent;
             this.lblRound.Font = new System.Drawing.Font("Segoe UI Emoji", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblRound.ForeColor = System.Drawing.Color.White;
-            //this.lblRound.Location = new System.Drawing.Point(770, 9);
+            this.lblRound.Location = new System.Drawing.Point(0, 0);
             this.lblRound.Name = "lblRound";
             this.lblRound.Size = new System.Drawing.Size(350, 50);
             this.lblRound.TabIndex = 0;
@@ -172,6 +168,58 @@
             this.volumeBar.TabIndex = 0;
             this.volumeBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.volumeBar_Scroll);
             // 
+            // statsMenu
+            // 
+            this.statsMenu.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.StatsMenu;
+            this.statsMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.statsMenu.Controls.Add(this.moneyLabel);
+            this.statsMenu.Controls.Add(this.speedLabel);
+            this.statsMenu.Controls.Add(this.attackLabel);
+            this.statsMenu.Location = new System.Drawing.Point(4, 186);
+            this.statsMenu.Name = "statsMenu";
+            this.statsMenu.Size = new System.Drawing.Size(328, 355);
+            this.statsMenu.TabIndex = 2;
+            this.statsMenu.Visible = false;
+            // 
+            // moneyLabel
+            // 
+            this.moneyLabel.AutoSize = true;
+            this.moneyLabel.BackColor = System.Drawing.Color.Transparent;
+            this.moneyLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.moneyLabel.ForeColor = System.Drawing.Color.White;
+            this.moneyLabel.Location = new System.Drawing.Point(182, 259);
+            this.moneyLabel.Name = "moneyLabel";
+            this.moneyLabel.Size = new System.Drawing.Size(78, 32);
+            this.moneyLabel.TabIndex = 2;
+            this.moneyLabel.Text = "label3";
+            this.moneyLabel.Visible = false;
+            // 
+            // speedLabel
+            // 
+            this.speedLabel.AutoSize = true;
+            this.speedLabel.BackColor = System.Drawing.Color.Transparent;
+            this.speedLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.speedLabel.ForeColor = System.Drawing.Color.White;
+            this.speedLabel.Location = new System.Drawing.Point(182, 150);
+            this.speedLabel.Name = "speedLabel";
+            this.speedLabel.Size = new System.Drawing.Size(78, 32);
+            this.speedLabel.TabIndex = 1;
+            this.speedLabel.Text = "label2";
+            this.speedLabel.Visible = false;
+            // 
+            // attackLabel
+            // 
+            this.attackLabel.AutoSize = true;
+            this.attackLabel.BackColor = System.Drawing.Color.Transparent;
+            this.attackLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.attackLabel.ForeColor = System.Drawing.Color.White;
+            this.attackLabel.Location = new System.Drawing.Point(182, 52);
+            this.attackLabel.Name = "attackLabel";
+            this.attackLabel.Size = new System.Drawing.Size(78, 32);
+            this.attackLabel.TabIndex = 0;
+            this.attackLabel.Text = "label1";
+            this.attackLabel.Visible = false;
+            // 
             // settingsBtn
             // 
             this.settingsBtn.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.settings;
@@ -188,7 +236,7 @@
             // 
             this.btn_upSpeed.AutoSize = true;
             this.btn_upSpeed.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            //this.btn_upSpeed.Location = new System.Drawing.Point(315, 630);
+            this.btn_upSpeed.Location = new System.Drawing.Point(0, 0);
             this.btn_upSpeed.Name = "btn_upSpeed";
             this.btn_upSpeed.Size = new System.Drawing.Size(120, 35);
             this.btn_upSpeed.TabIndex = 1;
@@ -196,11 +244,19 @@
             this.btn_upSpeed.UseVisualStyleBackColor = true;
             this.btn_upSpeed.Click += new System.EventHandler(this.upSpeed_Click);
             // 
+            // tmrBtnFix
+            // 
+            this.tmrBtnFix.Tick += new System.EventHandler(this.tmrBtnReset);
+            // 
+            // tmrRound
+            // 
+            this.tmrRound.Tick += new System.EventHandler(this.round_Tick);
+            // 
             // btn_upAttack
             // 
             this.btn_upAttack.AutoSize = true;
             this.btn_upAttack.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            //this.btn_upAttack.Location = new System.Drawing.Point(630, 630);
+            this.btn_upAttack.Location = new System.Drawing.Point(0, 0);
             this.btn_upAttack.Name = "btn_upAttack";
             this.btn_upAttack.Size = new System.Drawing.Size(120, 35);
             this.btn_upAttack.TabIndex = 1;
@@ -216,8 +272,9 @@
             this.BackgroundImage = global::TowerDefense_TheRPG.Properties.Resources.title;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1149, 726);
-            this.Controls.Add(this.settingsBtn);
             this.Controls.Add(this.settingMenu);
+            this.Controls.Add(this.settingsBtn);
+            this.Controls.Add(this.statsMenu);
             this.Controls.Add(this.btnStoryLine);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblStoryLine);
@@ -231,6 +288,8 @@
             this.Text = "Tower Defense The RPG";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.settingMenu.ResumeLayout(false);
+            this.statsMenu.ResumeLayout(false);
+            this.statsMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,5 +315,9 @@
         private Label lblRound;
         private Button btn_upSpeed;
         private Button btn_upAttack;
+        private Panel statsMenu;
+        private Label moneyLabel;
+        private Label speedLabel;
+        private Label attackLabel;
     }
 }
