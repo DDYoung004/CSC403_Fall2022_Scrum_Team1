@@ -154,8 +154,8 @@ namespace TowerDefense_TheRPG
         private void round_Tick(object sender, EventArgs e)
         {
             CenterVillage();
-            attackLabel.Text = ((float)player.Attack).ToString("0.00");
-            speedLabel.Text = ((float)player.MoveSpeed).ToString();
+            attackLabel.Text = ((int)(player.Attack * 100)).ToString();
+            speedLabel.Text = (player.MoveSpeed).ToString();
             moneyLabel.Text = "$" + player.Money.ToString();
             btn_upSpeed.Location = new System.Drawing.Point(((Width / 2) - 300), ((Height / 2) + 300));
             btn_upAttack.Location = new System.Drawing.Point(((Width / 2) + 100), ((Height / 2) + 300));
@@ -242,6 +242,14 @@ namespace TowerDefense_TheRPG
             power_up_temp = new List<Tuple<int, string>>();
             arrows = new List<Arrow>();
             player = new Player(Width / 2, Height / 2 + 100);
+            player.Name = textBox1.Text; // set player name attribute from the text box on the start screen
+            textBox1.Visible = false; // have to hide element so that it does not override player controls (it will)
+            textBox1.Enabled = false; // see previous comment above
+            label1.Visible = false; // also have to hide this
+            player.ControlNameLabel.Text = player.Name;
+            player.ControlNameLabel.Visible = true;
+            player.ControlHealthBarFull.Visible = false;
+            player.ControlHealthBarEmpty.Visible = false;
             village = new Village(Width / 2 - 80, Height / 2 - 50);
             village.ControlContainer.SendToBack();
             tmrSpawnEnemies.Enabled = true;
@@ -285,7 +293,6 @@ namespace TowerDefense_TheRPG
                 btnStart.Visible = false;
                 btnStoryLine.Text = "Hide Storyline";
                 lblStoryLine.Visible = true;
-
                 tmrSpawnEnemies.Enabled = false;
                 tmrMoveEnemies.Enabled = false;
                 tmrSpawnPowerUps.Enabled = false;
@@ -298,6 +305,12 @@ namespace TowerDefense_TheRPG
                 btn_upSpeed.Visible = false;
                 btn_upAttack.Enabled = false;
                 btn_upAttack.Visible = false;
+                textBox1.Visible = false;
+                label1.Visible = false;
+                settingsBtn.Visible = false;
+                settingsXbtn.Visible = false;
+                settingMenu.Visible = false;
+                volumeBar.Visible = false;
             }
             else
             {
@@ -309,6 +322,10 @@ namespace TowerDefense_TheRPG
                 lblStoryLine.Visible = false;
                 tmrTextCrawl.Enabled = false;
                 lblPause.Visible = false;
+                textBox1.Visible = true;
+                label1.Visible = true;
+                settingsBtn.Visible = true;
+                settingsBtn.Enabled = true;
             }
         }
 
@@ -417,7 +434,8 @@ namespace TowerDefense_TheRPG
         }
         public void roundHelper(int level, int xp, int money)
         {
-            lblRound.Text = ("Round:" + getRound(level).ToString() + " | Level:" + level.ToString());
+            getRound(level);
+            lblRound.Text = ("Round:" + round.ToString() + " | Level:" + level.ToString());
         }
         public void GenEnemyPos(out int x, out int y)
         {
@@ -472,12 +490,16 @@ namespace TowerDefense_TheRPG
         }
         private void RemovePowerUps()
         {
-            if (power_up_temp?.Any() == false)
+            //if (power_up_temp?.Any() == false)
+            //{
+            //    power_up_temp.Add(Tuple.Create(0, "attack"));
+            //}
+            if (power_up_temp.Count() >= 1)
             {
-                power_up_temp.Add(Tuple.Create(0, "attack"));
+                Tuple<int, string> power = power_up_temp[0];
+                power_up_temp.RemoveAt(0);
+                player.RemoveTempStats(power.Item1, power.Item2);
             }
-            Tuple<int, string> power = power_up_temp[0];
-            player.RemoveTempStats(power.Item1, power.Item2);
         }
         private void MoveEnemies()
         {
@@ -656,6 +678,7 @@ namespace TowerDefense_TheRPG
                 arrowBefore = tmrSpawnArrows.Enabled;
                 tmrSpawnArrows.Enabled = false;
                 tmrMoveArrows.Enabled = false;
+                tmrSpawnPowerUps.Enabled = false;
                 lblPause.Visible = true;
                 btn_upSpeed.Visible = true;
                 btn_upSpeed.Enabled = true;
@@ -674,6 +697,7 @@ namespace TowerDefense_TheRPG
                 tmrMoveEnemies.Enabled = true;
                 tmrSpawnArrows.Enabled = arrowBefore;
                 tmrMoveArrows.Enabled = true;
+                tmrSpawnPowerUps.Enabled = true;
                 btn_upSpeed.Visible = false;
                 btn_upSpeed.Enabled = false;
                 btn_upAttack.Enabled = false;
@@ -701,6 +725,10 @@ namespace TowerDefense_TheRPG
             tw.WriteLine(player.MaxHealth);
             tw.WriteLine(player.CurHealth);
             tw.WriteLine(player.MoveSpeed);
+            tw.WriteLine(round);
+            tw.WriteLine(player.Name);
+
+
 
             // close the stream     
             tw.Close();
@@ -720,6 +748,8 @@ namespace TowerDefense_TheRPG
             string max_health = tr.ReadLine();
             string curr_health = tr.ReadLine();
             string move_speed = tr.ReadLine();
+            string theRound = tr.ReadLine();
+            string playerName = tr.ReadLine();
 
             //Convert the strings to int, bool, or float
             int one;
@@ -765,6 +795,13 @@ namespace TowerDefense_TheRPG
                 player.MoveSpeed = one;
                 Console.WriteLine("MoveSpeed: " + one);
             }
+            if (int.TryParse(theRound, out one))
+            {
+                round = one;
+            }
+            player.Name = playerName;
+            player.ControlNameLabel.Text = player.Name;
+
 
             // close the stream
             tr.Close();

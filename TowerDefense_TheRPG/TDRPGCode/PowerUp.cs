@@ -41,7 +41,7 @@ namespace TowerDefense_TheRPG.code
             power_up.MoveSpeed = 0;
             power_up.SetMaxHealth(0.1f);
             power_up.Attack = 0.0f;
-            power_up.StatsMultiplier = 1;
+            power_up.StatsMultiplier = 5;
             power_up.StatsType = "Attack";
             return power_up;
         }
@@ -58,7 +58,7 @@ namespace TowerDefense_TheRPG.code
             power_up.MoveSpeed = 0;
             power_up.SetMaxHealth(0.1f);
             power_up.Attack = 0.0f;
-            power_up.StatsMultiplier = 2;
+            power_up.StatsMultiplier = 5;
             power_up.StatsType = "MoveSpeed";
             return power_up;
         }

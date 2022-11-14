@@ -73,7 +73,7 @@
         {
             if (statsType == "Attack")
             {
-                Attack += statsMult;
+                Attack += ((float)statsMult)/10;
             }
             if (statsType == "MoveSpeed")
             {
@@ -92,7 +92,7 @@
         {
             if (statsType == "Attack")
             {
-                Attack -= statsMult;
+                Attack -= (float)(statsMult)/10;
             }
             if (statsType == "MoveSpeed")
             {
