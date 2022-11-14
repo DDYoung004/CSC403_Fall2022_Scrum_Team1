@@ -49,9 +49,8 @@
 
         #region Fields
         private Control ControlCharacter;
-        public  Control ControlHealthBarFull; //made this public so it can be turned invisible at start
-        public Control ControlHealthBarEmpty; //made this public so it can be turned invisible at start
-        public Control ControlNameLabel; //made this public so it can be turned invisible at start
+        private Control ControlHealthBarFull;
+        private Control ControlHealthBarEmpty;
         private const int HEALTH_BAR_WIDTH = 50;
         private int lastMoveDirX;
         private int lastMoveDirY;
@@ -148,7 +147,7 @@
             {
                 Top = Y,
                 Left = X,
-                Width = Math.Max(W, HEALTH_BAR_WIDTH + 20),
+                Width = Math.Max(W, HEALTH_BAR_WIDTH),
                 Height = H + 30,
                 BackColor = Color.Transparent,
             };
@@ -179,39 +178,12 @@
                 Top = H + 2,
                 Left = 0,
             };
-            ControlNameLabel = new Label()
-            {
-                // For all intents and purposes, this should be no different from the health bar, except that it displays the player's name instead of health
-                Text = "",
-                BackColor = Color.Transparent,
-                ForeColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle,
-                Width = HEALTH_BAR_WIDTH + 30, // have to give extra width, so as to be able to render the name
-                Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point), //the font has to be really small in order to get the name to render more than 10 characters.
-                Height = 50,
-                Top = H + 5,
-                Left = 0,
-            };
-            if(Name.Contains("player"))
-            {
-                ControlNameLabel.Visible = true;
-            }
-            else
-            {
-                ControlNameLabel.Visible = false;
-            }
             ControlContainer.Controls.Add(ControlCharacter);
-<<<<<<< Updated upstream
             if (Name != "attack_power_up" && Name != "speed_power_up")
             {
                 ControlContainer.Controls.Add(ControlHealthBarFull);
                 ControlContainer.Controls.Add(ControlHealthBarEmpty);
             }
-=======
-            ControlContainer.Controls.Add(ControlHealthBarFull);
-            ControlContainer.Controls.Add(ControlHealthBarEmpty);
-            ControlContainer.Controls.Add(ControlNameLabel);
->>>>>>> Stashed changes
             ControlManager.Form.Controls.Add(ControlContainer);
         }
 

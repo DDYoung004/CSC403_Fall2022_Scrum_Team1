@@ -12,8 +12,4 @@
     <FileVersion>1.0.0.42</FileVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
-  </ItemGroup>
-
 </Project>
