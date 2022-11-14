@@ -492,6 +492,7 @@ namespace TowerDefense_TheRPG
                         {
                             enemy.Hide();
                             player.GainXP(enemy.XPGiven);
+                            player.GainMoney(enemy.MoneyGiven);
                         }
                         else
                         {

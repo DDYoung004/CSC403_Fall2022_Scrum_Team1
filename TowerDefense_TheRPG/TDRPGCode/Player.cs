@@ -6,8 +6,7 @@
     public class Player : Character
     {
         /// <summary>
-        /// Amount of money the player has. Currently this is not being
-        /// used but you could add this as a feature.
+        /// Amount of money the player has.
         /// </summary>
         public int Money { get; private set; }
 
