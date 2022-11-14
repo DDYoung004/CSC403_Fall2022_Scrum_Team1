@@ -211,11 +211,17 @@ namespace TowerDefense_TheRPG
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SwapPause(Keys.Escape);
-            DialogResult dialogResult = MessageBox.Show("Save Player?", "Saver", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (player is object)
             {
-                SaveStats();
+                if (village.IsVisible == true)
+                {
+                    SwapPause(Keys.Escape);
+                    DialogResult dialogResult = MessageBox.Show("Save Player?", "Saver", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        SaveStats();
+                    }
+                }
             }
         }
 
